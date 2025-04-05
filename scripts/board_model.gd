@@ -73,7 +73,7 @@ func _get_all_matches() -> Array[Model]:
 				continue
 			if _is_matching_neighbor(m1, m2):
 				m1_matches.append_array([m1, m2])
-		if m1_matches.size() == 3:
+		if m1_matches.size() >= 3:
 			matches.append_array(m1_matches)
 	
 	var unique_matches = _unique(matches)
