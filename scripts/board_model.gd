@@ -90,6 +90,6 @@ func _unique(arr: Array[Model]) -> Array[Model]:
 	return seen
 	
 func _random_mood():
-	var mood_values = Mood.Mood.values()
+	var mood_values = Enums.Mood.values()
 	var random_mood = mood_values[randi() % mood_values.size()]
 	return random_mood

@@ -1,3 +1,9 @@
 class_name Piece
+extends Node2D
 
-extends Node
+
+@export var sprite2D : Sprite2D
+
+
+func set_texture(texture: Texture):
+	sprite2D.texture = texture

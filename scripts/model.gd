@@ -3,5 +3,5 @@ extends Object
 
 var x: int
 var y: int
-var mood: Mood
+var mood: Enums.Mood
 var piece: Piece

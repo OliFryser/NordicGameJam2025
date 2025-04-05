@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Piece_Factory" load_steps=7 format=3 uid="uid://b5p6h0gaqb6ua"]
+
+[ext_resource type="Texture2D" uid="uid://7miwlivu13jj" path="res://sprites/angryFace.png" id="1_8cvuw"]
+[ext_resource type="Script" uid="uid://bh2lu3qi7fw3y" path="res://scripts/piece_factory.gd" id="1_uiofh"]
+[ext_resource type="Texture2D" uid="uid://bpeqjxnttivkk" path="res://sprites/disgustFace.png" id="2_ctkc8"]
+[ext_resource type="Texture2D" uid="uid://civvjrxqdd51c" path="res://sprites/smileFace.png" id="3_dwbbf"]
+[ext_resource type="Texture2D" uid="uid://ihtnnl5xjdve" path="res://sprites/sadFace.png" id="4_08kv5"]
+[ext_resource type="PackedScene" uid="uid://r3wfevq7wo7k" path="res://scenes/piece.tscn" id="4_ctkc8"]
+
+[resource]
+script = ExtResource("1_uiofh")
+happy = ExtResource("3_dwbbf")
+sad = ExtResource("4_08kv5")
+disgusted = ExtResource("2_ctkc8")
+angry = ExtResource("1_8cvuw")
+pieceScene = ExtResource("4_ctkc8")
+metadata/_custom_type_script = "uid://bh2lu3qi7fw3y"

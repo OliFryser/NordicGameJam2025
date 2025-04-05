@@ -1,20 +1,30 @@
-class_name Piece_Factory
+class_name PieceFactory
+extends Resource
 
-extends Object
 
 @export var happy: Texture
 @export var sad: Texture
 @export var disgusted: Texture
 @export var angry: Texture
+@export var pieceScene : PackedScene
 
-func build(mood: Mood.Mood) -> Texture:
+
+func build(mood: Enums.Mood) -> Piece:
+	var texture = get_texture(mood)
+	assert(texture)
+	var piece = pieceScene.instantiate()
+	piece.set_texture(texture)
+	return piece
+
+func get_texture(mood: Enums.Mood) -> Texture:
 	match mood:
-		Mood.Mood.HAPPY:
+		Enums.Mood.HAPPY:
 			return happy
-		Mood.Mood.ANGRY:
+		Enums.Mood.ANGRY:
 			return angry
-		Mood.Mood.DISGUSTED:
+		Enums.Mood.DISGUSTED:
 			return disgusted
-		Mood.Mood.SAD:
+		Enums.Mood.SAD:
 			return sad
-	return null
+		_:
+			return null

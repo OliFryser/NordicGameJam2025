@@ -17,4 +17,4 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Mood="*res://scripts/mood.gd"
+Enums="*res://scripts/enums.gd"
