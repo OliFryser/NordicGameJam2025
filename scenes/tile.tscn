@@ -1,6 +1,11 @@
-[gd_scene format=3 uid="uid://ca1nuvv8f1sd0"]
+[gd_scene load_steps=2 format=3 uid="uid://ca1nuvv8f1sd0"]
 
-[node name="Slot" type="Node2D"]
+[ext_resource type="Script" uid="uid://cxbeg3l3sw747" path="res://scripts/tile.gd" id="1_3dk36"]
+
+[node name="Tile" type="Node2D" node_paths=PackedStringArray("line_2d", "color_rect")]
+script = ExtResource("1_3dk36")
+line_2d = NodePath("Line2D")
+color_rect = NodePath("ColorRect")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(50, 50, 50, -50, -50, -50, -50, 50)
