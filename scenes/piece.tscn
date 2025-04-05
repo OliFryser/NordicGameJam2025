@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://r3wfevq7wo7k"]
+[gd_scene load_steps=4 format=3 uid="uid://r3wfevq7wo7k"]
 
 [ext_resource type="Script" uid="uid://vrrfteh8ul6s" path="res://scripts/piece.gd" id="1_s58gp"]
 [ext_resource type="Texture2D" uid="uid://civvjrxqdd51c" path="res://sprites/smileFace.png" id="2_s58gp"]
 
-[node name="Piece" type="Node2D" node_paths=PackedStringArray("sprite2D")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s58gp"]
+size = Vector2(1, 1)
+
+[node name="Piece" type="Node2D" node_paths=PackedStringArray("sprite2D", "collisionShape")]
 script = ExtResource("1_s58gp")
 sprite2D = NodePath("Sprite2D")
+collisionShape = NodePath("Area2D/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_s58gp")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_s58gp")

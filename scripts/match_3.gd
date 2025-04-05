@@ -29,7 +29,7 @@ func set_pieces(boardModel: BoardModel):
 	var tileSize = boardGenerator.tileSize
 	for model in boardModel.models:
 		model.piece.position = Vector2(model.x * tileSize, model.y * tileSize)
-		model.piece.sprite2D.scale *= pieceSize
+		model.piece.set_size(pieceSize, tileSize)
 		boardGenerator.board.add_child(model.piece)
 		
 		
