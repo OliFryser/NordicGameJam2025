@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://r3wfevq7wo7k"]
+[gd_scene load_steps=3 format=3 uid="uid://r3wfevq7wo7k"]
 
-[ext_resource type="Texture2D" uid="uid://7miwlivu13jj" path="res://sprites/angryFace.png" id="1_gebih"]
+[ext_resource type="Script" uid="uid://vrrfteh8ul6s" path="res://scripts/piece.gd" id="1_s58gp"]
+[ext_resource type="Texture2D" uid="uid://civvjrxqdd51c" path="res://sprites/smileFace.png" id="2_s58gp"]
 
-[node name="Piece" type="Node2D"]
+[node name="Piece" type="Node2D" node_paths=PackedStringArray("sprite2D")]
+script = ExtResource("1_s58gp")
+sprite2D = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_gebih")
+texture = ExtResource("2_s58gp")

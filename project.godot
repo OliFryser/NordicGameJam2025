@@ -14,3 +14,7 @@ config/name="NordicGameJam2025"
 run/main_scene="uid://dk4b7v87qmwyx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Enums="*res://scripts/enums.gd"
