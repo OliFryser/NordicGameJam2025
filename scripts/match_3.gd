@@ -41,7 +41,16 @@ func on_piece_clicked(piece: Piece):
 		boardModel.swap(piece, selection)
 		selection.hide_selection()
 		selection = null
-		boardModel._update_board()
+		update_board()
 	else:
 		selection = piece
 		piece.display_selection()
+
+func update_board():
+	var matches = boardModel.get_all_matches()
+	boardModel.remove_models(matches)
+	# animate disappearance (and free)
+	boardModel.descend_models()
+	# animate all models to their positions
+	# refill 
+	# animate refill

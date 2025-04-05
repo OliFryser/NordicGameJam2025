@@ -36,7 +36,7 @@ func is_valid_swap(piece1: Piece, piece2: Piece) -> bool:
 		return false
 	
 	_swap_positions(model1, model2)
-	var matches = _get_all_matches().size()
+	var matches = get_all_matches().size()
 	_swap_positions(model1, model2)
 	return matches > 0
 	
@@ -45,6 +45,11 @@ func swap(piece1: Piece, piece2: Piece):
 	var model1 = _get_model(piece1)
 	var model2 = _get_model(piece2)
 	_swap_positions(model1, model2)
+
+
+func remove_models(models_to_remove: Array[Model]):
+	for model in models_to_remove:
+		models.erase(model)
 	
 	
 func _get_model(piece: Piece) -> Model:
@@ -61,21 +66,14 @@ func _swap_positions(model1: Model, model2: Model) -> void:
 	model2.y = y1
 	
 
-func _update_board() -> void:
-	var matches: Array[Model] = _get_all_matches()
-	
-	for m in matches: 
-		models.erase(m)
-	
-	for model in models:
-		var matches_below_model: int = matches.count(func (other) -> bool: 
+func descend_models() -> void:
+	for model in models: 
+		var models_below: int = models.count(func (other) -> bool: 
 			return model.x == other.x && model.y > other.y)
-		model.y -= matches_below_model
-	
-	_refill()
+		model.y = models_below
 
 
-func _refill() -> void:
+func refill() -> void:
 	# assumes everything has fallen down
 	for column in range(size_x):
 		var highest_up: int = _max(column)
@@ -99,9 +97,10 @@ func _fill_column(column: int, amount: int) -> void:
 		model.x = column
 		model.y = y
 		model.mood = Enums.Mood.values().pick_random()
+		model.piece = pieceFactory.build(model.mood)
 
 
-func _get_all_matches() -> Array[Model]:
+func get_all_matches() -> Array[Model]:
 	var matches: Array[Model] = []
 	for m1 in models:
 		var m1_matches: Array[Model] = []
