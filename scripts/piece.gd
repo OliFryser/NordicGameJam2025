@@ -27,16 +27,14 @@ func _set_clickable_area_size(area_size: int):
 
 func display_selection():
 	var tween = get_tree().create_tween()
-	tween\
-			.tween_property(sprite2D, "modulate", Color.WHITE, 1)\
-			.set_ease(Tween.EASE_IN)
+	tween.tween_property(sprite2D, "modulate", Color(2, 2, 2), .05)\
+			.set_ease(Tween.EASE_OUT)
 	
 	
 func hide_selection():
 	var tween = get_tree().create_tween()
-	tween\
-			.tween_property(sprite2D, "modulate", Color.WHITE, 0)\
-			.set_ease(Tween.EASE_IN)
+	tween.tween_property(sprite2D, "modulate", Color.WHITE, .05)\
+			.set_ease(Tween.EASE_OUT)
 
 
 func _on_button_button_down() -> void:
