@@ -27,7 +27,23 @@ func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 			m.y = j
 			m.piece = pieceFactory.build(m.mood)
 			models.append(m)
-
+			
+func swap(piece1: Piece, piece2: Piece):
+	var model1 = _get_model(piece1)
+	var model2 = _get_model(piece2)
+	_swap_positions(model1, model2)
+	
+func _get_model(piece: Piece) -> Model:
+	var index = models.find_custom(func (model: Model) -> int: return model.piece == piece)
+	return models[index]
+	
+func _swap_positions(model1: Model, model2: Model) -> void:
+	var x1 = model1.x
+	var y1 = model1.y
+	model1.x = model2.x
+	model1.y = model2.y
+	model2.x = x1
+	model2.y = y1
 
 func _update_board() -> void:
 	var matches: Array[Model] = _get_all_matches()
