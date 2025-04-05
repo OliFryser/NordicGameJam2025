@@ -36,13 +36,17 @@ func set_pieces(boardModel: BoardModel):
 		boardGenerator.board.add_child(model.piece)
 	
 		
-func on_piece_clicked(piece: Piece): 
+func on_piece_clicked(piece: Piece):
+	if (selection == piece):
+		return
 	if selection and boardModel.is_valid_swap(piece, selection):
 		boardModel.swap(piece, selection)
 		selection.hide_selection()
 		selection = null
 		update_board()
 	else:
+		if selection:
+			selection.hide_selection()
 		selection = piece
 		piece.display_selection()
 
