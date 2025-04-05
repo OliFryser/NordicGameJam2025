@@ -1,3 +1,3 @@
 extends Node
 
-enum Mood { HAPPY, SAD, DISGUSTED, ANGRY }
+enum Mood { HAPPY, SAD, DISGUSTED, ANGRY, SCARED }

@@ -18,3 +18,4 @@ config/icon="res://icon.svg"
 [autoload]
 
 Enums="*res://scripts/enums.gd"
+Selection="*res://scripts/selection.gd"

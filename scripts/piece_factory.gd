@@ -6,6 +6,7 @@ extends Resource
 @export var sad: Texture
 @export var disgusted: Texture
 @export var angry: Texture
+@export var scared: Texture
 @export var pieceScene : PackedScene
 
 
@@ -26,5 +27,7 @@ func get_texture(mood: Enums.Mood) -> Texture:
 			return disgusted
 		Enums.Mood.SAD:
 			return sad
+		Enums.Mood.SCARED:
+			return scared
 		_:
 			return null

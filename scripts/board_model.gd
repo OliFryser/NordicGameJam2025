@@ -28,14 +28,29 @@ func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 			m.piece = pieceFactory.build(m.mood)
 			models.append(m)
 			
+			
+func is_valid_swap(piece1: Piece, piece2: Piece) -> bool: 
+	var model1 = _get_model(piece1)
+	var model2 = _get_model(piece2)
+	if !_is_neighbor(model1, model2):
+		return false
+	
+	_swap_positions(model1, model2)
+	var matches = _get_all_matches().size()
+	_swap_positions(model1, model2)
+	return matches > 0
+	
+	
 func swap(piece1: Piece, piece2: Piece):
 	var model1 = _get_model(piece1)
 	var model2 = _get_model(piece2)
 	_swap_positions(model1, model2)
 	
+	
 func _get_model(piece: Piece) -> Model:
 	var index = models.find_custom(func (model: Model) -> int: return model.piece == piece)
 	return models[index]
+	
 	
 func _swap_positions(model1: Model, model2: Model) -> void:
 	var x1 = model1.x
@@ -44,6 +59,7 @@ func _swap_positions(model1: Model, model2: Model) -> void:
 	model1.y = model2.y
 	model2.x = x1
 	model2.y = y1
+	
 
 func _update_board() -> void:
 	var matches: Array[Model] = _get_all_matches()
@@ -101,11 +117,14 @@ func _get_all_matches() -> Array[Model]:
 	return unique_matches
 
 
+func _is_neighbor(m1: Model, m2: Model) -> bool:
+	var is_horizontal_neighbor = m1.x == m2.x and abs(m1.y - m2.y) == 1
+	var is_vertical_neighbor = m1.y == m2.y and abs(m1.x - m2.x) == 1
+	return is_horizontal_neighbor or is_vertical_neighbor
+
+
 func _is_matching_neighbor(m1, m2) -> bool:
-	if abs(m1.x - m2.x) != 1 and abs(m1.y - m2.y) != 1:
-		return false
-	
-	return m1.mood == m2.mood
+	return _is_neighbor(m1, m2) and m1.mood == m2.mood
 
 
 func _unique(arr: Array[Model]) -> Array[Model]:

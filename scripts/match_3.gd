@@ -2,6 +2,8 @@
 class_name Match3
 extends Node2D
 
+var selection: Piece
+
 
 @export var width : int = 20:
 	set(p_width):
@@ -30,6 +32,16 @@ func set_pieces(boardModel: BoardModel):
 	for model in boardModel.models:
 		model.piece.position = Vector2(model.x * tileSize, model.y * tileSize)
 		model.piece.set_size(pieceSize, tileSize)
+		model.piece.clicked.connect(on_piece_clicked)
 		boardGenerator.board.add_child(model.piece)
+	
 		
-		
+func on_piece_clicked(piece: Piece): 
+	if selection and boardModel.is_valid_swap(piece, selection):
+		boardModel.swap(piece, selection)
+		selection.hide_selection()
+		selection = null
+		boardModel._update_board()
+	else:
+		selection = piece
+		piece.display_selection()
