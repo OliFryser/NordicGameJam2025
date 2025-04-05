@@ -1,0 +1,1 @@
+enum Mood { HAPPY, SAD, DISGUSTED, ANGRY }

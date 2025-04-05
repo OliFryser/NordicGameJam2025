@@ -1,9 +1,6 @@
 class_name Board_Model
 extends RefCounted
 
-
-const Type = preload("res://type.gd")
-
 var models: Array[Model] = []
 var size_x: int
 var size_y: int
@@ -21,10 +18,10 @@ func _init(x: int, y: int) -> void:
 	for j in range(y):
 		for i in range(x):
 			var m = Model.new()
-			m.Type = _random_type()
+			m.Mood = _random_mood()
 			m.x = i
 			m.y = j
-			#m.node = 
+			#m.piece = 
 			models.append(m)
 	
 	
@@ -62,7 +59,7 @@ func _fill_column(column: int, amount: int) -> void:
 		var model = Model.new()
 		model.x = column
 		model.y = y
-		model.type = _random_type()
+		model.mood = _random_mood()
 	
 func _get_all_matches() -> Array[Model]:
 	var matches: Array[Model] = []
@@ -83,7 +80,7 @@ func _is_matching_neighbor(m1, m2) -> bool:
 	if abs(m1.x - m2.x) != 1 and abs(m1.y - m2.y) != 1:
 		return false
 	
-	return m1.type == m2.type
+	return m1.mood == m2.mood
 	
 func _unique(arr: Array[Model]) -> Array[Model]:
 	var seen = []
@@ -92,7 +89,7 @@ func _unique(arr: Array[Model]) -> Array[Model]:
 			seen.append(model)
 	return seen
 	
-func _random_type():
-	var type_values = Type.Type.values()
-	var random_type = type_values[randi() % type_values.size()]
-	return random_type
+func _random_mood():
+	var mood_values = Mood.Mood.values()
+	var random_mood = mood_values[randi() % mood_values.size()]
+	return random_mood
