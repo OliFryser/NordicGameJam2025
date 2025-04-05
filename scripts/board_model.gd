@@ -25,8 +25,6 @@ func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 			m.mood = Enums.Mood.values().pick_random()
 			m.x = i
 			m.y = j
-			if (j == 0):
-				m.mood = Enums.Mood.SAD
 			m.piece = pieceFactory.build(m.mood)
 			models.append(m)
 			
@@ -106,6 +104,7 @@ func _fill_column(column: int, amount: int) -> void:
 		model.y = y
 		model.mood = Enums.Mood.values().pick_random()
 		model.piece = pieceFactory.build(model.mood)
+		models.append(model)
 
 
 func get_all_matches() -> Array[Model]:
@@ -127,6 +126,10 @@ func get_all_matches() -> Array[Model]:
 	
 	var unique_matches = _unique(matches)
 	return unique_matches
+
+
+func is_neighbor(piece1: Piece, piece2: Piece):
+	return _is_neighbor(_get_model(piece1), _get_model(piece2))
 
 
 func _is_neighbor(m1: Model, m2: Model) -> bool:

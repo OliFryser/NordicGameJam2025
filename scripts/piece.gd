@@ -41,8 +41,17 @@ func disappear():
 	queue_free()
 
 
+func update_swap_position(position: Vector2, tween: Tween):
+	tween.tween_property(self, "position", position, .2)\
+			.from_current()
+
+
 func update_position(position: Vector2):
-	self.position = position
+	var tween = create_tween()
+	tween.tween_property(self, "position", position, randf_range(.8,1.5))\
+			.from_current()\
+			.set_trans(Tween.TRANS_BOUNCE)\
+			.set_ease(Tween.EASE_OUT)
 
 
 func _on_button_button_down() -> void:
