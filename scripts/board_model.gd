@@ -1,9 +1,12 @@
-class_name Board_Model
+class_name BoardModel
 extends RefCounted
+
 
 var models: Array[Model] = []
 var size_x: int
 var size_y: int
+var pieceFactory: PieceFactory
+
 
 # (0,2) (1,2) (2,2)
 #
@@ -11,20 +14,21 @@ var size_y: int
 #
 # (0,0) (1,0) (2,0)
 
-func _init(x: int, y: int) -> void:
+func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 	size_x = x
 	size_y = y
+	self.pieceFactory = pieceFactory
 	models = []
 	for j in range(y):
 		for i in range(x):
-			var m = Model.new()
-			m.Mood = _random_mood()
+			var m := Model.new()
+			m.mood = Enums.Mood.values().pick_random()
 			m.x = i
 			m.y = j
-			#m.piece = 
+			m.piece = pieceFactory.build(m.mood)
 			models.append(m)
-	
-	
+
+
 func _update_board() -> void:
 	var matches: Array[Model] = _get_all_matches()
 	
@@ -37,14 +41,16 @@ func _update_board() -> void:
 		model.y -= matches_below_model
 	
 	_refill()
-	
+
+
 func _refill() -> void:
 	# assumes everything has fallen down
 	for column in range(size_x):
 		var highest_up: int = _max(column)
 		var amount_to_fill = size_y - highest_up
 		_fill_column(column, amount_to_fill)
-	
+
+
 func _max(column: int):
 	var high = 0
 	for model in models:
@@ -53,14 +59,16 @@ func _max(column: int):
 		if model.y > high:
 			high = model.y
 	return high
-	
+
+
 func _fill_column(column: int, amount: int) -> void:
 	for y in range(amount, size_y):
 		var model = Model.new()
 		model.x = column
 		model.y = y
-		model.mood = _random_mood()
-	
+		model.mood = Enums.Mood.values().pick_random()
+
+
 func _get_all_matches() -> Array[Model]:
 	var matches: Array[Model] = []
 	for m1 in models:
@@ -76,20 +84,17 @@ func _get_all_matches() -> Array[Model]:
 	var unique_matches = _unique(matches)
 	return unique_matches
 
+
 func _is_matching_neighbor(m1, m2) -> bool:
 	if abs(m1.x - m2.x) != 1 and abs(m1.y - m2.y) != 1:
 		return false
 	
 	return m1.mood == m2.mood
-	
+
+
 func _unique(arr: Array[Model]) -> Array[Model]:
 	var seen = []
 	for model in arr:
 		if model not in seen:
 			seen.append(model)
 	return seen
-	
-func _random_mood():
-	var mood_values = Enums.Mood.values()
-	var random_mood = mood_values[randi() % mood_values.size()]
-	return random_mood

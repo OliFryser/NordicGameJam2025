@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Piece_Factory" load_steps=7 format=3 uid="uid://b5p6h0gaqb6ua"]
+[gd_resource type="Resource" script_class="PieceFactory" load_steps=7 format=3 uid="uid://b5p6h0gaqb6ua"]
 
 [ext_resource type="Texture2D" uid="uid://7miwlivu13jj" path="res://sprites/angryFace.png" id="1_8cvuw"]
 [ext_resource type="Script" uid="uid://bh2lu3qi7fw3y" path="res://scripts/piece_factory.gd" id="1_uiofh"]

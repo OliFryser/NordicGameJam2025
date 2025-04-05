@@ -1,17 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk4b7v87qmwyx"]
+[gd_scene load_steps=6 format=3 uid="uid://dk4b7v87qmwyx"]
 
 [ext_resource type="Script" uid="uid://cnqycc8h4tokk" path="res://scripts/board.gd" id="1_08q8q"]
+[ext_resource type="Script" uid="uid://bcke14ry4lg5x" path="res://scripts/match_3.gd" id="1_wywb0"]
 [ext_resource type="Script" uid="uid://bhdplk5a6yvc5" path="res://scripts/board_generator.gd" id="2_30s42"]
+[ext_resource type="Resource" uid="uid://b5p6h0gaqb6ua" path="res://resources/piece_factory.tres" id="2_alnhi"]
 [ext_resource type="PackedScene" uid="uid://ca1nuvv8f1sd0" path="res://scenes/tile.tscn" id="2_b8cy4"]
 
-[node name="Match3" type="Node2D"]
+[node name="Match3" type="Node2D" node_paths=PackedStringArray("boardGenerator")]
+script = ExtResource("1_wywb0")
+width = 8
+height = 6
+boardGenerator = NodePath("BoardGenerator")
+pieceFactory = ExtResource("2_alnhi")
+pieceSize = 70
 
 [node name="BoardGenerator" type="Node" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("2_30s42")
 tileScene = ExtResource("2_b8cy4")
 tileSize = 80
-width = 8
-height = 6
 board = NodePath("Board")
 metadata/_custom_type_script = "uid://bhdplk5a6yvc5"
 
