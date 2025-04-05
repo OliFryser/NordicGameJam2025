@@ -3,7 +3,7 @@ extends Node2D
 
 
 @export var sprite2D : Sprite2D
-@export var collisionShape : CollisionShape2D
+@export var button : Button
 
 
 signal clicked(piece: Piece)
@@ -21,22 +21,23 @@ func set_size(size : int, area_size: int):
 
 
 func _set_clickable_area_size(area_size: int):
-	collisionShape.scale *= area_size
+	button.position -= Vector2(area_size * .5, area_size * .5)
+	button.size = Vector2(area_size, area_size)
 	
 
 func display_selection():
-	
+	var tween = get_tree().create_tween()
+	tween\
+			.tween_property(sprite2D, "modulate", Color.WHITE, 1)\
+			.set_ease(Tween.EASE_IN)
 	
 	
 func hide_selection():
-	
-	
-	
+	var tween = get_tree().create_tween()
+	tween\
+			.tween_property(sprite2D, "modulate", Color.WHITE, 0)\
+			.set_ease(Tween.EASE_IN)
 
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if (event is InputEventMouseButton 
-			and event.pressed 
-			and event.button_index == MOUSE_BUTTON_LEFT
-	):
-		clicked.emit(self)
+func _on_button_button_down() -> void:
+	clicked.emit(self)

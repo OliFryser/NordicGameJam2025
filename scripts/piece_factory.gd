@@ -17,6 +17,7 @@ func build(mood: Enums.Mood) -> Piece:
 	piece.set_texture(texture)
 	return piece
 
+
 func get_texture(mood: Enums.Mood) -> Texture:
 	match mood:
 		Enums.Mood.HAPPY:
