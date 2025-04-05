@@ -1,5 +1,5 @@
 class_name Model
-extends Object
+extends RefCounted
 
 var x: int
 var y: int

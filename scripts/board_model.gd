@@ -72,9 +72,12 @@ func _swap_positions(model1: Model, model2: Model) -> void:
 	
 
 func descend_models() -> void:
+	var copy = models.duplicate(true)
 	for model in models: 
-		var models_below: int = models.count(func (other) -> bool: 
-			return model.x == other.x && model.y > other.y)
+		var models_below = 0
+		for other in copy:
+			if model.x == other.x and model.y > other.y:
+				models_below += 1
 		model.y = models_below
 
 
