@@ -37,5 +37,13 @@ func hide_selection():
 			.set_ease(Tween.EASE_OUT)
 
 
+func disappear():
+	queue_free()
+
+
+func update_position(position: Vector2):
+	self.position = position
+
+
 func _on_button_button_down() -> void:
 	clicked.emit(self)

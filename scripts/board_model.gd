@@ -25,6 +25,8 @@ func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 			m.mood = Enums.Mood.values().pick_random()
 			m.x = i
 			m.y = j
+			if (j == 0):
+				m.mood = Enums.Mood.SAD
 			m.piece = pieceFactory.build(m.mood)
 			models.append(m)
 			
@@ -53,8 +55,11 @@ func remove_models(models_to_remove: Array[Model]):
 	
 	
 func _get_model(piece: Piece) -> Model:
-	var index = models.find_custom(func (model: Model) -> int: return model.piece == piece)
-	return models[index]
+	for model in models:
+		if model.piece == piece:
+			return model
+	printerr("No model with that piece!")
+	return null
 	
 	
 func _swap_positions(model1: Model, model2: Model) -> void:
@@ -103,31 +108,46 @@ func _fill_column(column: int, amount: int) -> void:
 func get_all_matches() -> Array[Model]:
 	var matches: Array[Model] = []
 	for m1 in models:
-		var m1_matches: Array[Model] = []
+		var m1_horizontal_matches: Array[Model] = []
+		var m1_vertical_matches: Array[Model] = []
 		for m2 in models:
 			if m1 == m2:
 				continue
-			if _is_matching_neighbor(m1, m2):
-				m1_matches.append_array([m1, m2])
-		if m1_matches.size() >= 3:
-			matches.append_array(m1_matches)
+			if _is_horizontal_matching_neighbor(m1, m2):
+				m1_horizontal_matches.append_array([m1, m2])
+			if _is_vertical_matching_neighbor(m1, m2):
+				m1_vertical_matches.append_array([m1, m2])
+		if m1_horizontal_matches.size() >= 3:
+			matches.append_array(m1_horizontal_matches)
+		if m1_vertical_matches.size() >= 3:
+			matches.append_array(m1_vertical_matches)
 	
 	var unique_matches = _unique(matches)
 	return unique_matches
 
 
 func _is_neighbor(m1: Model, m2: Model) -> bool:
-	var is_horizontal_neighbor = m1.x == m2.x and abs(m1.y - m2.y) == 1
-	var is_vertical_neighbor = m1.y == m2.y and abs(m1.x - m2.x) == 1
-	return is_horizontal_neighbor or is_vertical_neighbor
+	return _is_horizontal_neighbor(m1, m2) or _is_vertical_neighbor(m1, m2)
 
 
-func _is_matching_neighbor(m1, m2) -> bool:
-	return _is_neighbor(m1, m2) and m1.mood == m2.mood
+func _is_horizontal_neighbor(m1: Model, m2: Model) -> bool:
+	return m1.x == m2.x and abs(m1.y - m2.y) == 1
+
+
+func _is_vertical_neighbor(m1: Model, m2: Model) -> bool:
+	return m1.y == m2.y and abs(m1.x - m2.x) == 1
+
+
+func _is_horizontal_matching_neighbor(m1, m2) -> bool:
+	return _is_horizontal_neighbor(m1, m2) and m1.mood == m2.mood
+
+
+func _is_vertical_matching_neighbor(m1, m2) -> bool:
+	return _is_vertical_neighbor(m1, m2) and m1.mood == m2.mood
 
 
 func _unique(arr: Array[Model]) -> Array[Model]:
-	var seen = []
+	var seen : Array[Model] = []
 	for model in arr:
 		if model not in seen:
 			seen.append(model)
