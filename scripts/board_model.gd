@@ -27,8 +27,22 @@ func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 			m.y = j
 			m.piece = pieceFactory.build(m.mood)
 			models.append(m)
-			
-			
+
+
+func update_board_until_no_match():
+	var matches := get_all_matches()
+	if matches.size() == 0:
+		return
+	
+	for model in matches:
+		model.piece.queue_free()
+	
+	remove_models(matches)
+	descend_models()
+	refill()
+	update_board_until_no_match()
+
+
 func is_valid_swap(piece1: Piece, piece2: Piece) -> bool: 
 	var model1 = _get_model(piece1)
 	var model2 = _get_model(piece2)

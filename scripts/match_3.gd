@@ -24,13 +24,16 @@ var boardModel : BoardModel
 
 func _ready():
 	boardModel = BoardModel.new(width, height, pieceFactory)
+	boardModel.update_board_until_no_match()
 	boardGenerator.create_board(boardModel)
 	set_pieces()
 	
 
 func set_pieces():
 	var tileSize := boardGenerator.tileSize
-	_initialize_models(boardModel.models)
+	var tween = create_tween()
+	tween.set_parallel()
+	_initialize_models(boardModel.models, tween)
 
 
 func _get_screen_position_from_model(model: Model) -> Vector2:
@@ -76,21 +79,26 @@ func on_piece_clicked(piece: Piece):
 func update_board():
 	var tileSize = boardGenerator.tileSize
 	var matches := boardModel.get_all_matches()
-	
+	if matches.size() == 0:
+		return
 	boardModel.remove_models(matches)
 	for model in matches:
 		model.piece.disappear()
 	
 	boardModel.descend_models()
 	var new_models := boardModel.refill()
-	_initialize_models(new_models)
+	var tween = create_tween()
+	tween.set_parallel()
+	_initialize_models(new_models, tween)
 	for model in boardModel.models:
-		model.piece.update_position(_get_screen_position_from_model(model))
+		model.piece.update_position(_get_screen_position_from_model(model), tween)
+	await tween.finished
+	update_board()
 
-func _initialize_models(models: Array[Model]) -> void:
+func _initialize_models(models: Array[Model], tween: Tween) -> void:
 	for model in models:
 		model.piece.position = _get_screen_position_from_model(model) + Vector2(0, -6 * boardGenerator.tileSize)
-		model.piece.update_position(_get_screen_position_from_model(model))
+		model.piece.update_position(_get_screen_position_from_model(model), tween)
 		model.piece.set_size(pieceSize, boardGenerator.tileSize)
 		model.piece.clicked.connect(on_piece_clicked)
 		boardGenerator.board.add_child(model.piece)
