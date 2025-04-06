@@ -19,13 +19,14 @@
 [ext_resource type="Texture2D" uid="uid://dw7l5e8cxis1h" path="res://sprites/UI Assets/Progress_Bar.png" id="16_6r5gw"]
 [ext_resource type="Script" uid="uid://debrgkfv3j75f" path="res://scripts/progress_bar_window.gd" id="16_wbccy"]
 
-[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow")]
+[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow")]
 script = ExtResource("1_vxgxr")
 match3 = NodePath("GameWindow/Match3")
 score_label = NodePath("GameWindow/Label")
 background = NodePath("Background")
 progressBarWindow = NodePath("ProgressBarWindow")
 supervisorWindow = NodePath("SupervisorWindow")
+dialogueWindow = NodePath("DialogueWindow")
 
 [node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_gl26t")

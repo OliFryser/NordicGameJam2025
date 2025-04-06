@@ -26,4 +26,4 @@ func on_level_completed():
 func on_points_received(reward: int, total: int):
 	score_label.text = "Salary: $%d" % total
 	progressBarWindow.update_progress_bar(total)
-	
+	supervisorWindow.set_idle()
