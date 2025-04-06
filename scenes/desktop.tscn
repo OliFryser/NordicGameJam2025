@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cuuve4yh8wwoc"]
+[gd_scene load_steps=22 format=3 uid="uid://cuuve4yh8wwoc"]
 
 [ext_resource type="Script" uid="uid://b6svxojfs2br1" path="res://scenes/background.gd" id="1_gl26t"]
 [ext_resource type="Texture2D" uid="uid://lnsyukrps6mc" path="res://sprites/UI Assets/Main_Desktop.png" id="1_pkmwo"]
@@ -130,6 +130,7 @@ soundPlayer = NodePath("SoundEffectPlayer")
 
 [node name="SoundEffectPlayer" type="AudioStreamPlayer2D" parent="DialogueWindow"]
 stream = ExtResource("16_iamu6")
+volume_db = 24.0
 
 [node name="Dock" type="Node2D" parent="."]
 

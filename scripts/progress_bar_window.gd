@@ -20,7 +20,7 @@ func update_progress_bar(points: int):
 	if points >= currentProgressForNextLevel:
 		for child in progressBar.get_children():
 			child.queue_free()
-		levelCompleted.emit(points % progressForNextLevel)
+		levelCompleted.emit(points / progressForNextLevel)
 		currentProgressForNextLevel += progressForNextLevel
 	
 	var progress := (points % progressForNextLevel) / (progressForNextLevel as float)

@@ -46,7 +46,6 @@ func on_points_received(reward: int, total: int):
 	score_label.text = "Salary: $%d" % total
 	progressBarWindow.update_progress_bar(total)
 	supervisorWindow.set_idle()
-	supervisorWindow.start_point_response(reward)
 	show_reward_label(reward)
 
 
