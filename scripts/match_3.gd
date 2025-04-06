@@ -4,7 +4,7 @@ extends Node2D
 
 
 var selection: Piece
-
+var points: int
 
 @export var width : int = 20:
 	set(p_width):
@@ -20,6 +20,8 @@ var selection: Piece
 @export var pieceFactory: PieceFactory
 @export var pieceSize : int = 60
 var boardModel : BoardModel
+
+signal new_points(reward: int, total: int)
 
 
 func _ready():
@@ -81,6 +83,11 @@ func update_board():
 	var matches := boardModel.get_all_matches()
 	if matches.size() == 0:
 		return
+	
+	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)) * 10)
+	points += reward
+	new_points.emit(reward, points)
+		
 	boardModel.remove_models(matches)
 	var tweenDisappear := create_tween()
 	tweenDisappear.set_parallel()
