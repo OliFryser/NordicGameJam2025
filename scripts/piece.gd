@@ -46,8 +46,8 @@ func update_swap_position(position: Vector2, tween: Tween):
 			.from_current()
 
 
-func update_position(position: Vector2):
-	var tween = create_tween()
+func update_position(position: Vector2, tween : Tween):
+	#var tween = create_tween()
 	tween.tween_property(self, "position", position, randf_range(.8,1.5))\
 			.from_current()\
 			.set_trans(Tween.TRANS_BOUNCE)\
