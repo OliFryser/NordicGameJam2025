@@ -82,8 +82,14 @@ func update_board():
 	if matches.size() == 0:
 		return
 	boardModel.remove_models(matches)
+	var tweenDisappear := create_tween()
+	tweenDisappear.set_parallel()
 	for model in matches:
-		model.piece.disappear()
+		model.piece.disappear(tweenDisappear)
+	await tweenDisappear.finished
+	
+	for model in matches:
+		model.piece.queue_free()
 	
 	boardModel.descend_models()
 	var new_models := boardModel.refill()

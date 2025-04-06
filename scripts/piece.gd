@@ -37,8 +37,16 @@ func hide_selection():
 			.set_ease(Tween.EASE_OUT)
 
 
-func disappear():
-	queue_free()
+func disappear(tween: Tween):
+	tween.tween_property(sprite2D, "scale", sprite2D.scale * 2, .1)\
+			.set_ease(Tween.EASE_IN)
+	tween.tween_property(sprite2D, "modulate", Color(2, 2, 2), .1)\
+			.set_ease(tween.EASE_IN_OUT)
+	tween.tween_property(sprite2D, "modulate", Color(2, 2, 2, 0), .3)\
+			.set_ease(Tween.EASE_OUT)\
+			.set_delay(.1)
+	tween.tween_property(sprite2D, "scale", Vector2(0,0), .3)\
+			.set_ease(Tween.EASE_OUT).set_delay(.1)
 
 
 func update_swap_position(position: Vector2, tween: Tween):
