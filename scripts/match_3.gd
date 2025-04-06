@@ -4,7 +4,7 @@ extends Node2D
 
 @export var switch_sound: AudioStreamPlayer2D 
 @export var points_sound: AudioStreamPlayer2D
-@export var falling: AudioStreamPlayer2D
+@export var click: AudioStreamPlayer2D
 @export var invalid_move_sound: AudioStreamPlayer2D
 
 var selection: Piece
@@ -62,6 +62,8 @@ func on_piece_clicked(piece: Piece):
 	if lockInput:
 		return
 	
+	click.play()
+	
 	if (selection == piece):
 		selection.hide_selection()
 		selection = null
@@ -118,7 +120,7 @@ func update_board():
 	for model in boardModel.models:
 		model.piece.update_position(_get_screen_position_from_model(model), tween)
 	await tween.finished
-	falling.play()
+	click.play()
 	update_board()
 	
 	lockInput = false
