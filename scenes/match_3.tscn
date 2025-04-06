@@ -11,9 +11,13 @@
 [ext_resource type="AudioStream" uid="uid://qkh374g4ykcg" path="res://Sound/SFX/New_Piece_Drop.mp3" id="9_6fvop"]
 [ext_resource type="AudioStream" uid="uid://dux366on7fho4" path="res://Sound/SFX/Error.mp3" id="10_mll72"]
 
-[node name="Match3" type="Node2D" node_paths=PackedStringArray("boardGenerator")]
+[node name="Match3" type="Node2D" node_paths=PackedStringArray("switch_sound", "points_sound", "falling", "invalid_move_sound", "boardGenerator")]
 z_index = 1
 script = ExtResource("1_wywb0")
+switch_sound = NodePath("Switch")
+points_sound = NodePath("Points")
+falling = NodePath("Falling")
+invalid_move_sound = NodePath("InvalidMove")
 width = 8
 height = 6
 boardGenerator = NodePath("BoardGenerator2")

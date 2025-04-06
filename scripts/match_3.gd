@@ -2,10 +2,10 @@
 class_name Match3
 extends Node2D
 
-var switch_sound: AudioStreamPlayer2D 
-var points_sound: AudioStreamPlayer2D
-var falling: AudioStreamPlayer2D
-var invalid_move_sound: AudioStreamPlayer2D
+@export var switch_sound: AudioStreamPlayer2D 
+@export var points_sound: AudioStreamPlayer2D
+@export var falling: AudioStreamPlayer2D
+@export var invalid_move_sound: AudioStreamPlayer2D
 
 var selection: Piece
 var points: int
