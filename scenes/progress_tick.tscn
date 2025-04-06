@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://i2oo3b8b5jvx"]
+
+[ext_resource type="Texture2D" uid="uid://crsov2fsdk1ce" path="res://sprites/UI Assets/Progress_Bar_Tick.png" id="1_kudpr"]
+
+[node name="ProgressTick" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(5, 0)
+texture = ExtResource("1_kudpr")

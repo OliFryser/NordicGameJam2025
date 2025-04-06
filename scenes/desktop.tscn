@@ -1,26 +1,30 @@
-[gd_scene load_steps=16 format=3 uid="uid://dn2aiaed1hr4h"]
+[gd_scene load_steps=19 format=3 uid="uid://cuuve4yh8wwoc"]
 
 [ext_resource type="Script" uid="uid://b6svxojfs2br1" path="res://scenes/background.gd" id="1_gl26t"]
 [ext_resource type="Texture2D" uid="uid://lnsyukrps6mc" path="res://sprites/UI Assets/Main_Desktop.png" id="1_pkmwo"]
-[ext_resource type="Script" path="res://scenes/supervisor_window.gd" id="1_veafp"]
-[ext_resource type="Script" path="res://scenes/desktop.gd" id="1_vxgxr"]
+[ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scenes/supervisor_window.gd" id="1_veafp"]
+[ext_resource type="Script" uid="uid://d1bp06p76tyfw" path="res://scenes/desktop.gd" id="1_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://c44qsw6mrw706" path="res://sprites/UI Assets/Supervisor_Window.png" id="1_xxa2h"]
 [ext_resource type="Texture2D" uid="uid://cur3bth0yr7ch" path="res://sprites/UI Assets/Game_Window.png" id="2_7gre8"]
 [ext_resource type="PackedScene" uid="uid://dk4b7v87qmwyx" path="res://scenes/match_3.tscn" id="2_81rff"]
 [ext_resource type="Texture2D" uid="uid://lpwy7d8qr7uj" path="res://sprites/policeMAnIdle.png" id="2_pkmwo"]
 [ext_resource type="Texture2D" uid="uid://ceqrnasc6yteg" path="res://sprites/policeMAnScared.png" id="3_gl26t"]
 [ext_resource type="Texture2D" uid="uid://bn14gcbfl8xy1" path="res://sprites/UI Assets/Main_Desktop_Step_1.png" id="3_nd1jb"]
-[ext_resource type="PackedScene" path="res://scenes/dialogue_window.tscn" id="4_ox5hf"]
+[ext_resource type="PackedScene" uid="uid://rcbmkhapudtk" path="res://scenes/dialogue_window.tscn" id="4_ox5hf"]
 [ext_resource type="Texture2D" uid="uid://6588ll52uf5o" path="res://sprites/UI Assets/Main_Desktop_Step_2.png" id="4_yhf0c"]
 [ext_resource type="Texture2D" uid="uid://di3to50h6bgjp" path="res://sprites/UI Assets/Main_Desktop_Step_3.png" id="5_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://dxi3rrb2j2qwo" path="res://sprites/UI Assets/Main_Desktop_Final_Step.png" id="6_6r5gw"]
 [ext_resource type="FontFile" uid="uid://dwbrd00ek7qls" path="res://fonts/Tahoma.ttf" id="13_yhf0c"]
+[ext_resource type="PackedScene" uid="uid://i2oo3b8b5jvx" path="res://scenes/progress_tick.tscn" id="16_3liqb"]
+[ext_resource type="Texture2D" uid="uid://dw7l5e8cxis1h" path="res://sprites/UI Assets/Progress_Bar.png" id="16_6r5gw"]
+[ext_resource type="Script" uid="uid://debrgkfv3j75f" path="res://scripts/progress_bar_window.gd" id="16_wbccy"]
 
-[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background")]
+[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow")]
 script = ExtResource("1_vxgxr")
 match3 = NodePath("GameWindow/Match3")
 score_label = NodePath("GameWindow/Label")
 background = NodePath("Background")
+progressBarWindow = NodePath("ProgressBarWindow")
 
 [node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_gl26t")
@@ -85,10 +89,19 @@ scale = Vector2(49.64, 28.64)
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ProgressBarWindow" type="Node2D" parent="."]
+[node name="ProgressBarWindow" type="Node2D" parent="." node_paths=PackedStringArray("progressBar")]
+position = Vector2(0, 401)
+script = ExtResource("16_wbccy")
+progressTick = ExtResource("16_3liqb")
+progressBar = NodePath("HBoxContainer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ProgressBarWindow"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -213.0
+offset_top = 20.0
+offset_right = 247.0
+offset_bottom = 20.0
+theme_override_constants/separation = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="ProgressBarWindow"]
+z_index = 1
+texture = ExtResource("16_6r5gw")

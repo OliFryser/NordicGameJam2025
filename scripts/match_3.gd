@@ -89,7 +89,7 @@ func update_board():
 	
 	lockInput = true
 	
-	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)) * 10)
+	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)))
 	points += reward
 	new_points.emit(reward, points)
 		
