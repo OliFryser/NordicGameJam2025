@@ -24,6 +24,7 @@ var boardModel : BoardModel
 
 func _ready():
 	boardModel = BoardModel.new(width, height, pieceFactory)
+	boardModel.update_board_until_no_match()
 	boardGenerator.create_board(boardModel)
 	set_pieces()
 	
