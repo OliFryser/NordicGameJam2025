@@ -87,6 +87,7 @@ func refill() -> Array[Model]:
 		var amount_to_fill = size_y - highest_up - 1
 		var new_column_models = _fill_column(column, amount_to_fill)
 		new_models.append_array(new_column_models)
+	models.append_array(new_models)
 	return new_models
 
 

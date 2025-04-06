@@ -32,6 +32,7 @@ func set_pieces():
 	var tileSize := boardGenerator.tileSize
 	_initialize_models(boardModel.models)
 
+
 func _get_screen_position_from_model(model: Model) -> Vector2:
 	var tileSize := boardGenerator.tileSize
 	return Vector2(model.x * tileSize, (height - model.y - 1) * tileSize)
@@ -56,7 +57,6 @@ func on_piece_clicked(piece: Piece):
 		await _animate_swap(selection, piece)
 	
 		if boardModel.is_valid_swap(piece, selection):
-			print("match")
 			boardModel.swap(piece, selection)
 			selection.hide_selection()
 			selection = null
@@ -67,7 +67,6 @@ func on_piece_clicked(piece: Piece):
 			selection = null
 	
 	else:
-		print("No match")
 		if selection:
 			selection.hide_selection()
 		selection = piece
