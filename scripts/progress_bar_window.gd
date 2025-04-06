@@ -9,7 +9,7 @@ const MAX_TICKS = 47
 var currentTicks : int = 0
 var currentProgressForNextLevel
 
-signal levelCompleted
+signal levelCompleted(level: int)
 
 
 func _ready() -> void:
@@ -20,7 +20,7 @@ func update_progress_bar(points: int):
 	if points >= currentProgressForNextLevel:
 		for child in progressBar.get_children():
 			child.queue_free()
-		levelCompleted.emit()
+		levelCompleted.emit(points % progressForNextLevel)
 		currentProgressForNextLevel += progressForNextLevel
 	
 	var progress := (points % progressForNextLevel) / (progressForNextLevel as float)

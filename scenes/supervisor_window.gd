@@ -6,6 +6,8 @@ extends Node2D
 @export var supervisorIdle : Texture
 @export var supervisorScared : Texture
 @export var closeButton : Button
+@export var pointResponses : Array[String]
+@export var levelCompleteResponses: Array[String]
 
 
 signal say(message: String)
@@ -17,7 +19,7 @@ func _ready() -> void:
 
 func on_try_close():
 	set_scared()
-	say.emit("Don't do that!")
+	say.emit("Employee: insubordination will not be tolerated. You must sort. If you do not sort, you will be a threat to Safety. Please resume your sorting!")
 
 
 func set_idle() -> void:
@@ -26,3 +28,13 @@ func set_idle() -> void:
 
 func set_scared() -> void:
 	sprite.texture = supervisorScared
+
+
+func start_point_response(reward: int) -> void:
+	if reward > 50:
+		say.emit(pointResponses.pick_random())
+
+
+func start_level_completion_response(level: int) -> void:
+	if level < levelCompleteResponses.size():
+		say.emit(levelCompleteResponses[level])

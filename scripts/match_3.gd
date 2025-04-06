@@ -64,19 +64,23 @@ func on_piece_clicked(piece: Piece):
 	
 	click.play()
 	
+	
 	if (selection == piece):
 		selection.hide_selection()
 		selection = null
 		return
 		
+	lockInput = true
+	
 	if selection and boardModel.is_neighbor(selection, piece):
 		await _animate_swap(selection, piece)
-	
+		
 		if boardModel.is_valid_swap(piece, selection):
+			lockInput = true
 			boardModel.swap(piece, selection)
 			selection.hide_selection()
 			selection = null
-			update_board()
+			await update_board()
 		else:
 			invalid_move_sound.play()
 			await _animate_swap(selection, piece)
@@ -89,13 +93,12 @@ func on_piece_clicked(piece: Piece):
 		selection = piece
 		selection.display_selection()
 	
+	lockInput = false
 
 func update_board():
 	var matches := boardModel.get_all_matches()
 	if matches.size() == 0:
 		return
-	
-	lockInput = true
 	
 	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)))
 	points += reward
@@ -121,9 +124,7 @@ func update_board():
 		model.piece.update_position(_get_screen_position_from_model(model), tween)
 	await tween.finished
 	click.play()
-	update_board()
-	
-	lockInput = false
+	await update_board()
 
 func _initialize_models(models: Array[Model], tween: Tween) -> void:
 	for model in models:

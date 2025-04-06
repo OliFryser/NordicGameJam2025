@@ -12,12 +12,12 @@ label = NodePath("WindowFrame/Label")
 texture = ExtResource("2_dh7dl")
 
 [node name="Label" type="Label" parent="WindowFrame"]
-offset_left = -177.0
-offset_top = -61.0
-offset_right = 173.0
-offset_bottom = 119.0
+offset_left = -175.0
+offset_top = -59.0
+offset_right = 175.0
+offset_bottom = 121.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_1puwe")
 theme_override_font_sizes/font_size = 24
-text = "A bunch of super cool dialogue! dwjawd"
+text = "We're excited to guide you through another day of work, faithful employee. Please begin your sorting tasks!"
 autowrap_mode = 3

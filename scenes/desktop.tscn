@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dw7l5e8cxis1h" path="res://sprites/UI Assets/Progress_Bar.png" id="16_6r5gw"]
 [ext_resource type="Script" uid="uid://debrgkfv3j75f" path="res://scripts/progress_bar_window.gd" id="16_wbccy"]
 
-[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow")]
+[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow", "closeWindowButton")]
 script = ExtResource("1_vxgxr")
 match3 = NodePath("GameWindow/Match3")
 score_label = NodePath("GameWindow/Label")
@@ -27,6 +27,7 @@ background = NodePath("Background")
 progressBarWindow = NodePath("ProgressBarWindow")
 supervisorWindow = NodePath("SupervisorWindow")
 dialogueWindow = NodePath("DialogueWindow")
+closeWindowButton = NodePath("GameWindow/CloseGameButton")
 
 [node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_gl26t")
@@ -37,12 +38,14 @@ backgrounds = Array[Texture]([ExtResource("1_pkmwo"), ExtResource("3_nd1jb"), Ex
 texture = ExtResource("1_pkmwo")
 
 [node name="SupervisorWindow" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "closeButton")]
-position = Vector2(704, -167)
+position = Vector2(730, -299)
 script = ExtResource("1_veafp")
 sprite = NodePath("SupervisorSprite")
 supervisorIdle = ExtResource("2_pkmwo")
 supervisorScared = ExtResource("3_gl26t")
 closeButton = NodePath("Button")
+pointResponses = Array[String](["Awesome!", "Outstanding!", "Prodigious!", "Cost-Effective!", "Professional!", "Competent!", "Repressive!"])
+levelCompleteResponses = Array[String](["Well done, employee! Keep up the strong sorting work!", "Maintain your focus, employee! There are many more pieces still to be sorted!", "Don't lose sight of your goal, employee; you're helping the world progress!", "Employee: the pieces you sort are a threat to Safety! Maintain your resolve!", "Employee: understand how grateful people are for the invaluable service your sorting fulfills in maintaining Safety!"])
 
 [node name="WindowFrame" type="Node2D" parent="SupervisorWindow"]
 
@@ -85,8 +88,32 @@ theme_override_fonts/font = ExtResource("13_yhf0c")
 theme_override_font_sizes/font_size = 36
 text = "Salary: $0"
 
+[node name="CloseGameButton" type="Button" parent="GameWindow"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 615.0
+offset_top = -430.0
+offset_right = 623.0
+offset_bottom = -422.0
+scale = Vector2(2.96462, 3.2)
+
+[node name="Label2" type="Label" parent="GameWindow"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -11.5
+offset_right = 20.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+ $20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DialogueWindow" parent="." instance=ExtResource("4_ox5hf")]
-position = Vector2(717, 287)
+position = Vector2(606, 232)
 
 [node name="Dock" type="Node2D" parent="."]
 
