@@ -21,6 +21,11 @@ var selection: Piece
 @export var pieceSize : int = 60
 var boardModel : BoardModel
 
+@export var swap_sound: AudioStreamPlayer2D
+@export var points_sound: AudioStreamPlayer2D
+@export var falling_sound: AudioStreamPlayer2D
+@export var invalid_move_sound: AudioStreamPlayer2D
+
 
 func _ready():
 	boardModel = BoardModel.new(width, height, pieceFactory)
@@ -42,6 +47,7 @@ func _get_screen_position_from_model(model: Model) -> Vector2:
 
 
 func _animate_swap(selection: Piece, piece: Piece):
+	swap_sound.play()
 	var selectionPosition := selection.position
 	var tween := get_tree().create_tween()
 	tween.set_parallel()
@@ -65,6 +71,7 @@ func on_piece_clicked(piece: Piece):
 			selection = null
 			update_board()
 		else:
+			invalid_move_sound.play()
 			await _animate_swap(selection, piece)
 			selection.hide_selection()
 			selection = null
@@ -81,6 +88,9 @@ func update_board():
 	var matches := boardModel.get_all_matches()
 	if matches.size() == 0:
 		return
+		
+	points_sound.play()
+		
 	boardModel.remove_models(matches)
 	var tweenDisappear := create_tween()
 	tweenDisappear.set_parallel()
@@ -91,6 +101,7 @@ func update_board():
 	for model in matches:
 		model.piece.queue_free()
 	
+	falling_sound.play()
 	boardModel.descend_models()
 	var new_models := boardModel.refill()
 	var tween = create_tween()
