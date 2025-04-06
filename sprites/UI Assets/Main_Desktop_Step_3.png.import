@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bexwvqpb2p48"
-path="res://.godot/imported/chim.png-c7b4baa013a843fb235593c8d584ff2f.ctex"
+uid="uid://di3to50h6bgjp"
+path="res://.godot/imported/Main_Desktop_Step_3.png-eecce27bc95b8620a54fb3fdea276bc0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/chim.png"
-dest_files=["res://.godot/imported/chim.png-c7b4baa013a843fb235593c8d584ff2f.ctex"]
+source_file="res://sprites/UI Assets/Main_Desktop_Step_3.png"
+dest_files=["res://.godot/imported/Main_Desktop_Step_3.png-eecce27bc95b8620a54fb3fdea276bc0.ctex"]
 
 [params]
 
