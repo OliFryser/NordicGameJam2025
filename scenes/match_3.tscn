@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cgq1jl5fjbd3u" path="res://Sound/funny-cartoon-comedy-background-music-306997.mp3" id="6_gwfha"]
 
 [node name="Match3" type="Node2D" node_paths=PackedStringArray("boardGenerator")]
+z_index = 1
 script = ExtResource("1_wywb0")
 width = 8
 height = 6
@@ -18,7 +19,6 @@ pieceSize = 70
 [node name="BoardGenerator" type="Node" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("2_30s42")
 tileScene = ExtResource("2_b8cy4")
-tileSize = 80
 board = NodePath("Board")
 metadata/_custom_type_script = "uid://bhdplk5a6yvc5"
 
@@ -27,6 +27,7 @@ position = Vector2(-280, -200)
 script = ExtResource("1_08q8q")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_gwfha")

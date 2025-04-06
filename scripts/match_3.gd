@@ -4,21 +4,22 @@ extends Node2D
 
 
 var selection: Piece
-
+var points: int
 
 @export var width : int = 20:
 	set(p_width):
 		width = p_width
 		if Engine.is_editor_hint():
-			boardGenerator.create_board(boardModel)
+			boardGenerator.create_board(boardModel, tileSize)
 @export var height : int = 20:
 	set(p_height):
 		height = p_height
 		if Engine.is_editor_hint():
-			boardGenerator.create_board(boardModel)
+			boardGenerator.create_board(boardModel, tileSize)
 @export var boardGenerator : BoardGenerator
 @export var pieceFactory: PieceFactory
 @export var pieceSize : int = 60
+@export var tileSize : int = 80
 var boardModel : BoardModel
 
 @export var swap_sound: AudioStreamPlayer2D
@@ -26,23 +27,24 @@ var boardModel : BoardModel
 @export var falling_sound: AudioStreamPlayer2D
 @export var invalid_move_sound: AudioStreamPlayer2D
 
+signal new_points(reward: int, total: int)
+
 
 func _ready():
 	boardModel = BoardModel.new(width, height, pieceFactory)
 	boardModel.update_board_until_no_match()
-	boardGenerator.create_board(boardModel)
+	boardGenerator.create_board(boardModel, tileSize)
 	set_pieces()
 	
 
 func set_pieces():
-	var tileSize := boardGenerator.tileSize
+	
 	var tween = create_tween()
 	tween.set_parallel()
 	_initialize_models(boardModel.models, tween)
 
 
 func _get_screen_position_from_model(model: Model) -> Vector2:
-	var tileSize := boardGenerator.tileSize
 	return Vector2(model.x * tileSize, (height - model.y - 1) * tileSize)
 
 
@@ -84,12 +86,15 @@ func on_piece_clicked(piece: Piece):
 	
 
 func update_board():
-	var tileSize = boardGenerator.tileSize
 	var matches := boardModel.get_all_matches()
 	if matches.size() == 0:
 		return
 		
 	points_sound.play()
+	
+	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)) * 10)
+	points += reward
+	new_points.emit(reward, points)
 		
 	boardModel.remove_models(matches)
 	var tweenDisappear := create_tween()
@@ -114,8 +119,8 @@ func update_board():
 
 func _initialize_models(models: Array[Model], tween: Tween) -> void:
 	for model in models:
-		model.piece.position = _get_screen_position_from_model(model) + Vector2(0, -6 * boardGenerator.tileSize)
+		model.piece.position = _get_screen_position_from_model(model) + Vector2(0, -6 * tileSize)
 		model.piece.update_position(_get_screen_position_from_model(model), tween)
-		model.piece.set_size(pieceSize, boardGenerator.tileSize)
+		model.piece.set_size(pieceSize, tileSize)
 		model.piece.clicked.connect(on_piece_clicked)
 		boardGenerator.board.add_child(model.piece)
