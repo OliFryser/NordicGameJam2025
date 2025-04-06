@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dw7l5e8cxis1h" path="res://sprites/UI Assets/Progress_Bar.png" id="16_6r5gw"]
 [ext_resource type="Script" uid="uid://debrgkfv3j75f" path="res://scripts/progress_bar_window.gd" id="16_wbccy"]
 
-[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow", "closeWindowButton")]
+[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow", "closeWindowButton", "rewardLabel")]
 script = ExtResource("1_vxgxr")
 match3 = NodePath("GameWindow/Match3")
 score_label = NodePath("GameWindow/Label")
@@ -28,6 +28,7 @@ progressBarWindow = NodePath("ProgressBarWindow")
 supervisorWindow = NodePath("SupervisorWindow")
 dialogueWindow = NodePath("DialogueWindow")
 closeWindowButton = NodePath("GameWindow/CloseGameButton")
+rewardLabel = NodePath("GameWindow/RewardLabel")
 
 [node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_gl26t")
@@ -97,7 +98,8 @@ offset_right = 623.0
 offset_bottom = -422.0
 scale = Vector2(2.96462, 3.2)
 
-[node name="Label2" type="Label" parent="GameWindow"]
+[node name="RewardLabel" type="Label" parent="GameWindow"]
+z_index = 5
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -109,7 +111,12 @@ offset_right = 20.5
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "+ $20"
+theme_override_colors/font_color = Color(0.980392, 0.796078, 0, 1)
+theme_override_colors/font_outline_color = Color(0.103744, 0.103744, 0.103744, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("13_yhf0c")
+theme_override_font_sizes/font_size = 176
+text = "$ 20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
