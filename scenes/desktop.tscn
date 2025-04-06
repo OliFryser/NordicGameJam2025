@@ -1,16 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuuve4yh8wwoc"]
+[gd_scene load_steps=14 format=3 uid="uid://cuuve4yh8wwoc"]
 
+[ext_resource type="Script" uid="uid://b6svxojfs2br1" path="res://scenes/background.gd" id="1_gl26t"]
+[ext_resource type="Texture2D" uid="uid://lnsyukrps6mc" path="res://sprites/UI Assets/Main_Desktop.png" id="1_pkmwo"]
 [ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scenes/supervisor_window.gd" id="1_veafp"]
 [ext_resource type="Texture2D" uid="uid://c44qsw6mrw706" path="res://sprites/UI Assets/Supervisor_Window.png" id="1_xxa2h"]
 [ext_resource type="Texture2D" uid="uid://cur3bth0yr7ch" path="res://sprites/UI Assets/Game_Window.png" id="2_7gre8"]
 [ext_resource type="PackedScene" uid="uid://dk4b7v87qmwyx" path="res://scenes/match_3.tscn" id="2_81rff"]
 [ext_resource type="Texture2D" uid="uid://lpwy7d8qr7uj" path="res://sprites/policeMAnIdle.png" id="2_pkmwo"]
 [ext_resource type="Texture2D" uid="uid://ceqrnasc6yteg" path="res://sprites/policeMAnScared.png" id="3_gl26t"]
+[ext_resource type="Texture2D" uid="uid://bn14gcbfl8xy1" path="res://sprites/UI Assets/Main_Desktop_Step_1.png" id="3_nd1jb"]
 [ext_resource type="PackedScene" uid="uid://rcbmkhapudtk" path="res://scenes/dialogue_window.tscn" id="4_ox5hf"]
+[ext_resource type="Texture2D" uid="uid://6588ll52uf5o" path="res://sprites/UI Assets/Main_Desktop_Step_2.png" id="4_yhf0c"]
+[ext_resource type="Texture2D" uid="uid://di3to50h6bgjp" path="res://sprites/UI Assets/Main_Desktop_Step_3.png" id="5_vxgxr"]
+[ext_resource type="Texture2D" uid="uid://dxi3rrb2j2qwo" path="res://sprites/UI Assets/Main_Desktop_Final_Step.png" id="6_6r5gw"]
 
 [node name="Desktop" type="Node2D"]
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_gl26t")
+sprite = NodePath("Sprite2D")
+backgrounds = Array[Texture]([ExtResource("1_pkmwo"), ExtResource("3_nd1jb"), ExtResource("4_yhf0c"), ExtResource("5_vxgxr"), ExtResource("6_6r5gw")])
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+texture = ExtResource("1_pkmwo")
 
 [node name="SupervisorWindow" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 position = Vector2(794, -239)
@@ -43,3 +55,15 @@ texture = ExtResource("2_7gre8")
 
 [node name="DialogueWindow" parent="." instance=ExtResource("4_ox5hf")]
 position = Vector2(-748, -370)
+
+[node name="Dock" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -978.0
+offset_top = -571.0
+offset_right = -938.0
+offset_bottom = -531.0
+scale = Vector2(49.64, 28.64)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
