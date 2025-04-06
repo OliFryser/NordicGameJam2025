@@ -1,8 +1,10 @@
+class_name DialogueWindow
 extends Node2D
 
 
 @export var label : Label
 
-
-func _ready() -> void:
-	label.text = "Testing testing testing testing"
+func showMessage(message: String):
+	label.text = message
+	var newX := position.x + randf_range(-10, 10)
+	var newY := position.y + randf_range(-10, 10)
