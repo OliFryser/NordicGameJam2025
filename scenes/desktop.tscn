@@ -5,9 +5,9 @@
 [ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scenes/supervisor_window.gd" id="1_veafp"]
 [ext_resource type="Script" uid="uid://d1bp06p76tyfw" path="res://scenes/desktop.gd" id="1_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://c44qsw6mrw706" path="res://sprites/UI Assets/Supervisor_Window.png" id="1_xxa2h"]
+[ext_resource type="Texture2D" uid="uid://dm34i3oh3tu76" path="res://sprites/Player_Cursor_Idle_v2.png" id="2_3erbe"]
 [ext_resource type="Texture2D" uid="uid://cur3bth0yr7ch" path="res://sprites/UI Assets/Game_Window.png" id="2_7gre8"]
 [ext_resource type="PackedScene" uid="uid://dk4b7v87qmwyx" path="res://scenes/match_3.tscn" id="2_81rff"]
-[ext_resource type="Texture2D" uid="uid://brq1utgmdw3vc" path="res://sprites/Player Cursor (Idle).png" id="2_0542q"]
 [ext_resource type="Texture2D" uid="uid://lpwy7d8qr7uj" path="res://sprites/policeMAnIdle.png" id="2_pkmwo"]
 [ext_resource type="Texture2D" uid="uid://clscd2tco6wdk" path="res://sprites/Player Cursor (Click).png" id="3_3erbe"]
 [ext_resource type="Texture2D" uid="uid://ceqrnasc6yteg" path="res://sprites/policeMAnScared.png" id="3_gl26t"]
@@ -32,7 +32,7 @@ supervisorWindow = NodePath("SupervisorWindow")
 dialogueWindow = NodePath("DialogueWindow")
 closeWindowButton = NodePath("GameWindow/CloseGameButton")
 rewardLabel = NodePath("GameWindow/RewardLabel")
-cursorIdle = ExtResource("2_0542q")
+cursorIdle = ExtResource("2_3erbe")
 cursorClick = ExtResource("3_3erbe")
 
 [node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
