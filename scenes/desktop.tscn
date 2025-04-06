@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuuve4yh8wwoc"]
+[gd_scene load_steps=16 format=3 uid="uid://cuuve4yh8wwoc"]
 
 [ext_resource type="Script" uid="uid://b6svxojfs2br1" path="res://scenes/background.gd" id="1_gl26t"]
 [ext_resource type="Texture2D" uid="uid://lnsyukrps6mc" path="res://sprites/UI Assets/Main_Desktop.png" id="1_pkmwo"]
 [ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scenes/supervisor_window.gd" id="1_veafp"]
+[ext_resource type="Script" uid="uid://d1bp06p76tyfw" path="res://scenes/desktop.gd" id="1_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://c44qsw6mrw706" path="res://sprites/UI Assets/Supervisor_Window.png" id="1_xxa2h"]
 [ext_resource type="Texture2D" uid="uid://cur3bth0yr7ch" path="res://sprites/UI Assets/Game_Window.png" id="2_7gre8"]
 [ext_resource type="PackedScene" uid="uid://dk4b7v87qmwyx" path="res://scenes/match_3.tscn" id="2_81rff"]
@@ -13,8 +14,13 @@
 [ext_resource type="Texture2D" uid="uid://6588ll52uf5o" path="res://sprites/UI Assets/Main_Desktop_Step_2.png" id="4_yhf0c"]
 [ext_resource type="Texture2D" uid="uid://di3to50h6bgjp" path="res://sprites/UI Assets/Main_Desktop_Step_3.png" id="5_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://dxi3rrb2j2qwo" path="res://sprites/UI Assets/Main_Desktop_Final_Step.png" id="6_6r5gw"]
+[ext_resource type="FontFile" uid="uid://dwbrd00ek7qls" path="res://fonts/Tahoma.ttf" id="13_yhf0c"]
 
-[node name="Desktop" type="Node2D"]
+[node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background")]
+script = ExtResource("1_vxgxr")
+match3 = NodePath("GameWindow/Match3")
+score_label = NodePath("GameWindow/Label")
+background = NodePath("Background")
 
 [node name="Background" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_gl26t")
@@ -25,7 +31,7 @@ backgrounds = Array[Texture]([ExtResource("1_pkmwo"), ExtResource("3_nd1jb"), Ex
 texture = ExtResource("1_pkmwo")
 
 [node name="SupervisorWindow" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
-position = Vector2(794, -239)
+position = Vector2(704, -167)
 script = ExtResource("1_veafp")
 sprite = NodePath("SupervisorSprite")
 supervisorIdle = ExtResource("2_pkmwo")
@@ -44,6 +50,7 @@ texture = ExtResource("2_pkmwo")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GameWindow" type="Node2D" parent="."]
+position = Vector2(-146, -6)
 
 [node name="Match3" parent="GameWindow" instance=ExtResource("2_81rff")]
 tileSize = 100
@@ -53,8 +60,18 @@ tileSize = 100
 [node name="Sprite2D" type="Sprite2D" parent="GameWindow/WindowFrame"]
 texture = ExtResource("2_7gre8")
 
+[node name="Label" type="Label" parent="GameWindow"]
+offset_left = -626.0
+offset_top = -391.0
+offset_right = -226.0
+offset_bottom = -346.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_yhf0c")
+theme_override_font_sizes/font_size = 36
+text = "Salary: $0"
+
 [node name="DialogueWindow" parent="." instance=ExtResource("4_ox5hf")]
-position = Vector2(-748, -370)
+position = Vector2(717, 287)
 
 [node name="Dock" type="Node2D" parent="."]
 
@@ -67,3 +84,11 @@ offset_bottom = -531.0
 scale = Vector2(49.64, 28.64)
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="ProgressBarWindow" type="Node2D" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ProgressBarWindow"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="ProgressBarWindow"]

@@ -14,6 +14,7 @@ var pieceFactory: PieceFactory
 #
 # (0,0) (1,0) (2,0)
 
+
 func _init(x: int, y: int, pieceFactory : PieceFactory) -> void:
 	size_x = x
 	size_y = y

@@ -12,19 +12,15 @@ z_index = 1
 script = ExtResource("1_wywb0")
 width = 8
 height = 6
-boardGenerator = NodePath("BoardGenerator")
+boardGenerator = NodePath("BoardGenerator2")
 pieceFactory = ExtResource("2_alnhi")
 pieceSize = 70
 
-[node name="BoardGenerator" type="Node" parent="." node_paths=PackedStringArray("board")]
+[node name="BoardGenerator2" type="Node2D" parent="." node_paths=PackedStringArray("board")]
 script = ExtResource("2_30s42")
 tileScene = ExtResource("2_b8cy4")
-board = NodePath("Board")
+board = NodePath("../Board")
 metadata/_custom_type_script = "uid://bhdplk5a6yvc5"
-
-[node name="Board" type="Node2D" parent="BoardGenerator"]
-position = Vector2(-280, -200)
-script = ExtResource("1_08q8q")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -32,3 +28,7 @@ visible = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_gwfha")
 autoplay = true
+
+[node name="Board" type="Node2D" parent="."]
+position = Vector2(-280, -200)
+script = ExtResource("1_08q8q")

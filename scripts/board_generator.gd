@@ -1,6 +1,6 @@
 @tool
 class_name BoardGenerator
-extends Node
+extends Node2D
 
 
 @export var tileScene : PackedScene
