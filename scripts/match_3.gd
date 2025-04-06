@@ -110,7 +110,6 @@ func update_board():
 	for model in matches:
 		model.piece.queue_free()
 	
-	falling.play()
 	boardModel.descend_models()
 	var new_models := boardModel.refill()
 	var tween = create_tween()
@@ -119,6 +118,7 @@ func update_board():
 	for model in boardModel.models:
 		model.piece.update_position(_get_screen_position_from_model(model), tween)
 	await tween.finished
+	falling.play()
 	update_board()
 	
 	lockInput = false
