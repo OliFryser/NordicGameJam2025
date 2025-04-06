@@ -21,6 +21,7 @@ var points: int
 @export var pieceSize : int = 60
 @export var tileSize : int = 80
 var boardModel : BoardModel
+var lockInput : bool
 
 signal new_points(reward: int, total: int)
 
@@ -53,6 +54,9 @@ func _animate_swap(selection: Piece, piece: Piece):
 
 
 func on_piece_clicked(piece: Piece):
+	if lockInput:
+		return
+	
 	if (selection == piece):
 		selection.hide_selection()
 		selection = null
@@ -83,6 +87,8 @@ func update_board():
 	if matches.size() == 0:
 		return
 	
+	lockInput = true
+	
 	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)) * 10)
 	points += reward
 	new_points.emit(reward, points)
@@ -106,6 +112,8 @@ func update_board():
 		model.piece.update_position(_get_screen_position_from_model(model), tween)
 	await tween.finished
 	update_board()
+	
+	lockInput = false
 
 func _initialize_models(models: Array[Model], tween: Tween) -> void:
 	for model in models:
