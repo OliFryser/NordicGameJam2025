@@ -19,6 +19,7 @@
 [ext_resource type="FontFile" uid="uid://dwbrd00ek7qls" path="res://fonts/Tahoma.ttf" id="13_yhf0c"]
 [ext_resource type="PackedScene" uid="uid://i2oo3b8b5jvx" path="res://scenes/progress_tick.tscn" id="16_3liqb"]
 [ext_resource type="Texture2D" uid="uid://dw7l5e8cxis1h" path="res://sprites/UI Assets/Progress_Bar.png" id="16_6r5gw"]
+[ext_resource type="AudioStream" uid="uid://bdv30o3ljv8kp" path="res://Sound/SFX/msn-sound_1.mp3" id="16_iamu6"]
 [ext_resource type="Script" uid="uid://debrgkfv3j75f" path="res://scripts/progress_bar_window.gd" id="16_wbccy"]
 
 [node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow", "closeWindowButton", "rewardLabel")]
@@ -123,8 +124,12 @@ text = "$ 20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DialogueWindow" parent="." instance=ExtResource("4_ox5hf")]
+[node name="DialogueWindow" parent="." node_paths=PackedStringArray("soundPlayer") instance=ExtResource("4_ox5hf")]
 position = Vector2(606, 232)
+soundPlayer = NodePath("SoundEffectPlayer")
+
+[node name="SoundEffectPlayer" type="AudioStreamPlayer2D" parent="DialogueWindow"]
+stream = ExtResource("16_iamu6")
 
 [node name="Dock" type="Node2D" parent="."]
 
