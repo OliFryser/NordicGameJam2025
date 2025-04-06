@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dk4b7v87qmwyx"]
 
-[ext_resource type="Script" uid="uid://cnqycc8h4tokk" path="res://scripts/board.gd" id="1_08q8q"]
+[ext_resource type="Script" path="res://scripts/board.gd" id="1_08q8q"]
 [ext_resource type="Script" uid="uid://bcke14ry4lg5x" path="res://scripts/match_3.gd" id="1_wywb0"]
 [ext_resource type="Script" uid="uid://bhdplk5a6yvc5" path="res://scripts/board_generator.gd" id="2_30s42"]
 [ext_resource type="Resource" uid="uid://b5p6h0gaqb6ua" path="res://resources/piece_factory.tres" id="2_alnhi"]
@@ -11,9 +11,13 @@
 [ext_resource type="AudioStream" uid="uid://qkh374g4ykcg" path="res://Sound/SFX/New_Piece_Drop.mp3" id="9_6fvop"]
 [ext_resource type="AudioStream" uid="uid://dux366on7fho4" path="res://Sound/SFX/Error.mp3" id="10_mll72"]
 
-[node name="Match3" type="Node2D" node_paths=PackedStringArray("boardGenerator")]
+[node name="Match3" type="Node2D" node_paths=PackedStringArray("switch_sound", "points_sound", "click", "invalid_move_sound", "boardGenerator")]
 z_index = 1
 script = ExtResource("1_wywb0")
+switch_sound = NodePath("Switch")
+points_sound = NodePath("Points")
+click = NodePath("Falling")
+invalid_move_sound = NodePath("InvalidMove")
 width = 8
 height = 6
 boardGenerator = NodePath("BoardGenerator2")

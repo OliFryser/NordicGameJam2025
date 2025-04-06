@@ -2,10 +2,10 @@
 class_name Match3
 extends Node2D
 
-var switch_sound: AudioStreamPlayer2D 
-var points_sound: AudioStreamPlayer2D
-var falling: AudioStreamPlayer2D
-var invalid_move_sound: AudioStreamPlayer2D
+@export var switch_sound: AudioStreamPlayer2D 
+@export var points_sound: AudioStreamPlayer2D
+@export var click: AudioStreamPlayer2D
+@export var invalid_move_sound: AudioStreamPlayer2D
 
 var selection: Piece
 var points: int
@@ -62,6 +62,8 @@ func on_piece_clicked(piece: Piece):
 	if lockInput:
 		return
 	
+	click.play()
+	
 	if (selection == piece):
 		selection.hide_selection()
 		selection = null
@@ -110,7 +112,6 @@ func update_board():
 	for model in matches:
 		model.piece.queue_free()
 	
-	falling.play()
 	boardModel.descend_models()
 	var new_models := boardModel.refill()
 	var tween = create_tween()
@@ -119,6 +120,7 @@ func update_board():
 	for model in boardModel.models:
 		model.piece.update_position(_get_screen_position_from_model(model), tween)
 	await tween.finished
+	click.play()
 	update_board()
 	
 	lockInput = false
