@@ -72,7 +72,6 @@ scale = Vector2(3.15456, 3.27432)
 position = Vector2(-146, -6)
 
 [node name="Match3" parent="GameWindow" instance=ExtResource("2_81rff")]
-voice_effects = Array[AudioStream]([])
 tileSize = 100
 
 [node name="WindowFrame" type="Node2D" parent="GameWindow"]
