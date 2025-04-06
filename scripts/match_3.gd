@@ -2,6 +2,10 @@
 class_name Match3
 extends Node2D
 
+var switch_sound: AudioStreamPlayer2D 
+var points_sound: AudioStreamPlayer2D
+var falling: AudioStreamPlayer2D
+var invalid_move_sound: AudioStreamPlayer2D
 
 var selection: Piece
 var points: int
@@ -45,6 +49,7 @@ func _get_screen_position_from_model(model: Model) -> Vector2:
 
 
 func _animate_swap(selection: Piece, piece: Piece):
+	switch_sound.play()
 	var selectionPosition := selection.position
 	var tween := get_tree().create_tween()
 	tween.set_parallel()
@@ -71,6 +76,7 @@ func on_piece_clicked(piece: Piece):
 			selection = null
 			update_board()
 		else:
+			invalid_move_sound.play()
 			await _animate_swap(selection, piece)
 			selection.hide_selection()
 			selection = null
@@ -92,6 +98,7 @@ func update_board():
 	var reward = ceili((pow(matches.size(),2.5) + randi_range(0, 10)))
 	points += reward
 	new_points.emit(reward, points)
+	points_sound.play()
 		
 	boardModel.remove_models(matches)
 	var tweenDisappear := create_tween()
@@ -103,6 +110,7 @@ func update_board():
 	for model in matches:
 		model.piece.queue_free()
 	
+	falling.play()
 	boardModel.descend_models()
 	var new_models := boardModel.refill()
 	var tween = create_tween()

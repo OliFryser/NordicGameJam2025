@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk4b7v87qmwyx"]
+[gd_scene load_steps=11 format=3 uid="uid://dk4b7v87qmwyx"]
 
 [ext_resource type="Script" uid="uid://cnqycc8h4tokk" path="res://scripts/board.gd" id="1_08q8q"]
 [ext_resource type="Script" uid="uid://bcke14ry4lg5x" path="res://scripts/match_3.gd" id="1_wywb0"]
@@ -6,6 +6,10 @@
 [ext_resource type="Resource" uid="uid://b5p6h0gaqb6ua" path="res://resources/piece_factory.tres" id="2_alnhi"]
 [ext_resource type="PackedScene" uid="uid://ca1nuvv8f1sd0" path="res://scenes/tile.tscn" id="2_b8cy4"]
 [ext_resource type="AudioStream" uid="uid://cgq1jl5fjbd3u" path="res://Sound/funny-cartoon-comedy-background-music-306997.mp3" id="6_gwfha"]
+[ext_resource type="AudioStream" uid="uid://bvwek54doi01k" path="res://Sound/SFX/Swap.mp3" id="7_23yck"]
+[ext_resource type="AudioStream" uid="uid://bj6onhh2c3uon" path="res://Sound/SFX/Scoring_Points.mp3" id="8_3rbxb"]
+[ext_resource type="AudioStream" uid="uid://qkh374g4ykcg" path="res://Sound/SFX/New_Piece_Drop.mp3" id="9_6fvop"]
+[ext_resource type="AudioStream" uid="uid://dux366on7fho4" path="res://Sound/SFX/Error.mp3" id="10_mll72"]
 
 [node name="Match3" type="Node2D" node_paths=PackedStringArray("boardGenerator")]
 z_index = 1
@@ -32,3 +36,15 @@ autoplay = true
 [node name="Board" type="Node2D" parent="."]
 position = Vector2(-280, -200)
 script = ExtResource("1_08q8q")
+
+[node name="Switch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_23yck")
+
+[node name="Points" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_3rbxb")
+
+[node name="Falling" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_6fvop")
+
+[node name="InvalidMove" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_mll72")
