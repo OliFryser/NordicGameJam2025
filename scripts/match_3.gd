@@ -7,6 +7,9 @@ extends Node2D
 @export var click: AudioStreamPlayer2D
 @export var invalid_move_sound: AudioStreamPlayer2D
 
+@export var voice_effects: Array[AudioStream]
+@export var voice_effects_player: AudioStreamPlayer2D
+
 var selection: Piece
 var points: int
 
@@ -104,6 +107,9 @@ func update_board():
 	points += reward
 	new_points.emit(reward, points)
 	points_sound.play()
+	
+	voice_effects_player.stream = voice_effects.pick_random()
+	voice_effects_player.play()
 		
 	boardModel.remove_models(matches)
 	var tweenDisappear := create_tween()

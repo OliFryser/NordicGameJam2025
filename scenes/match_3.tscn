@@ -1,23 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk4b7v87qmwyx"]
+[gd_scene load_steps=15 format=3 uid="uid://dk4b7v87qmwyx"]
 
-[ext_resource type="Script" uid="uid://cnqycc8h4tokk" path="res://scripts/board.gd" id="1_08q8q"]
+[ext_resource type="Script" path="res://scripts/board.gd" id="1_08q8q"]
 [ext_resource type="Script" uid="uid://bcke14ry4lg5x" path="res://scripts/match_3.gd" id="1_wywb0"]
 [ext_resource type="Script" uid="uid://bhdplk5a6yvc5" path="res://scripts/board_generator.gd" id="2_30s42"]
 [ext_resource type="Resource" uid="uid://b5p6h0gaqb6ua" path="res://resources/piece_factory.tres" id="2_alnhi"]
 [ext_resource type="PackedScene" uid="uid://ca1nuvv8f1sd0" path="res://scenes/tile.tscn" id="2_b8cy4"]
+[ext_resource type="AudioStream" uid="uid://cbu81cmq2qrx1" path="res://Sound/VoiceLines/Awesome.mp3" id="2_lr1uj"]
+[ext_resource type="AudioStream" uid="uid://dtm74gcgn8u4i" path="res://Sound/VoiceLines/Outstanding.mp3" id="3_q6c66"]
+[ext_resource type="AudioStream" uid="uid://5sma6xftq4h1" path="res://Sound/VoiceLines/Repressive.mp3" id="4_4m0k6"]
+[ext_resource type="AudioStream" uid="uid://cg8a22yx1rhpl" path="res://Sound/VoiceLines/Scrumdiliptious.mp3" id="5_x6383"]
 [ext_resource type="AudioStream" uid="uid://cgq1jl5fjbd3u" path="res://Sound/funny-cartoon-comedy-background-music-306997.mp3" id="6_gwfha"]
 [ext_resource type="AudioStream" uid="uid://bvwek54doi01k" path="res://Sound/SFX/Swap.mp3" id="7_23yck"]
 [ext_resource type="AudioStream" uid="uid://bj6onhh2c3uon" path="res://Sound/SFX/Scoring_Points.mp3" id="8_3rbxb"]
 [ext_resource type="AudioStream" uid="uid://qkh374g4ykcg" path="res://Sound/SFX/New_Piece_Drop.mp3" id="9_6fvop"]
 [ext_resource type="AudioStream" uid="uid://dux366on7fho4" path="res://Sound/SFX/Error.mp3" id="10_mll72"]
 
-[node name="Match3" type="Node2D" node_paths=PackedStringArray("switch_sound", "points_sound", "click", "invalid_move_sound", "boardGenerator")]
+[node name="Match3" type="Node2D" node_paths=PackedStringArray("switch_sound", "points_sound", "click", "invalid_move_sound", "voice_effects_player", "boardGenerator")]
 z_index = 1
 script = ExtResource("1_wywb0")
 switch_sound = NodePath("Switch")
 points_sound = NodePath("Points")
 click = NodePath("Falling")
 invalid_move_sound = NodePath("InvalidMove")
+voice_effects = Array[AudioStream]([ExtResource("2_lr1uj"), ExtResource("3_q6c66"), ExtResource("4_4m0k6"), ExtResource("5_x6383")])
+voice_effects_player = NodePath("VoiceEffects")
 width = 8
 height = 6
 boardGenerator = NodePath("BoardGenerator2")
@@ -52,3 +58,5 @@ stream = ExtResource("9_6fvop")
 
 [node name="InvalidMove" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_mll72")
+
+[node name="VoiceEffects" type="AudioStreamPlayer2D" parent="."]
