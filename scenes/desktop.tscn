@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuuve4yh8wwoc"]
+
+[ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scenes/supervisor_window.gd" id="1_veafp"]
+[ext_resource type="Texture2D" uid="uid://c44qsw6mrw706" path="res://sprites/UI Assets/Supervisor_Window.png" id="1_xxa2h"]
+[ext_resource type="Texture2D" uid="uid://cur3bth0yr7ch" path="res://sprites/UI Assets/Game_Window.png" id="2_7gre8"]
+[ext_resource type="PackedScene" uid="uid://dk4b7v87qmwyx" path="res://scenes/match_3.tscn" id="2_81rff"]
+[ext_resource type="Texture2D" uid="uid://lpwy7d8qr7uj" path="res://sprites/policeMAnIdle.png" id="2_pkmwo"]
+[ext_resource type="Texture2D" uid="uid://ceqrnasc6yteg" path="res://sprites/policeMAnScared.png" id="3_gl26t"]
+[ext_resource type="PackedScene" uid="uid://rcbmkhapudtk" path="res://scenes/dialogue_window.tscn" id="4_ox5hf"]
+
+[node name="Desktop" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="SupervisorWindow" type="Node2D" parent="." node_paths=PackedStringArray("sprite")]
+position = Vector2(794, -239)
+script = ExtResource("1_veafp")
+sprite = NodePath("SupervisorSprite")
+supervisorIdle = ExtResource("2_pkmwo")
+supervisorScared = ExtResource("3_gl26t")
+
+[node name="WindowFrame" type="Node2D" parent="SupervisorWindow"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SupervisorWindow/WindowFrame"]
+texture = ExtResource("1_xxa2h")
+
+[node name="SupervisorSprite" type="Sprite2D" parent="SupervisorWindow"]
+position = Vector2(0, 27.975)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("2_pkmwo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="GameWindow" type="Node2D" parent="."]
+
+[node name="Match3" parent="GameWindow" instance=ExtResource("2_81rff")]
+tileSize = 100
+
+[node name="WindowFrame" type="Node2D" parent="GameWindow"]
+
+[node name="Sprite2D" type="Sprite2D" parent="GameWindow/WindowFrame"]
+texture = ExtResource("2_7gre8")
+
+[node name="DialogueWindow" parent="." instance=ExtResource("4_ox5hf")]
+position = Vector2(-748, -370)

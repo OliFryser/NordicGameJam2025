@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://rcbmkhapudtk"]
+
+[ext_resource type="Script" uid="uid://bs0kti2toiewn" path="res://dialogue_window.gd" id="1_tktrj"]
+[ext_resource type="Texture2D" uid="uid://dsb185bg5jgc2" path="res://sprites/UI Assets/Dialogue_Window.png" id="2_dh7dl"]
+[ext_resource type="FontFile" uid="uid://dwbrd00ek7qls" path="res://fonts/Tahoma.ttf" id="3_1puwe"]
+
+[node name="DialogueWindow" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_tktrj")
+label = NodePath("WindowFrame/Label")
+
+[node name="WindowFrame" type="Sprite2D" parent="."]
+texture = ExtResource("2_dh7dl")
+
+[node name="Label" type="Label" parent="WindowFrame"]
+offset_left = -177.0
+offset_top = -61.0
+offset_right = 173.0
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1puwe")
+theme_override_font_sizes/font_size = 24
+text = "A bunch of super cool dialogue! dwjawd"
+autowrap_mode = 3
