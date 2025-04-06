@@ -79,12 +79,15 @@ func descend_models() -> void:
 		model.y = models_below
 
 
-func refill() -> void:
+func refill() -> Array[Model]:
 	# assumes everything has fallen down
+	var new_models: Array[Model] = []
 	for column in range(size_x):
 		var highest_up: int = _max(column)
-		var amount_to_fill = size_y - highest_up
-		_fill_column(column, amount_to_fill)
+		var amount_to_fill = size_y - highest_up - 1
+		var new_column_models = _fill_column(column, amount_to_fill)
+		new_models.append_array(new_column_models)
+	return new_models
 
 
 func _max(column: int):
@@ -97,14 +100,16 @@ func _max(column: int):
 	return high
 
 
-func _fill_column(column: int, amount: int) -> void:
-	for y in range(amount, size_y):
+func _fill_column(column: int, amount: int) -> Array[Model]:
+	var new_models: Array[Model]
+	for y in range(size_y - amount, size_y, 1):
 		var model = Model.new()
 		model.x = column
 		model.y = y
 		model.mood = Enums.Mood.values().pick_random()
 		model.piece = pieceFactory.build(model.mood)
-		models.append(model)
+		new_models.append(model)
+	return new_models
 
 
 func get_all_matches() -> Array[Model]:

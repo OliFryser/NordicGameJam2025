@@ -16,7 +16,7 @@ func set_texture(texture: Texture):
 
 
 func set_size(size : int, area_size: int):
-	sprite2D.scale *= size
+	sprite2D.scale *= size 
 	_set_clickable_area_size(area_size)
 
 

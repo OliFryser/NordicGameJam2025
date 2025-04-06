@@ -25,17 +25,12 @@ var boardModel : BoardModel
 func _ready():
 	boardModel = BoardModel.new(width, height, pieceFactory)
 	boardGenerator.create_board(boardModel)
-	set_pieces(boardModel)
+	set_pieces()
 	
 
-func set_pieces(boardModel: BoardModel):
+func set_pieces():
 	var tileSize := boardGenerator.tileSize
-	for model in boardModel.models:
-		model.piece.position = _get_screen_position_from_model(model)
-		model.piece.set_size(pieceSize, tileSize)
-		model.piece.clicked.connect(on_piece_clicked)
-		boardGenerator.board.add_child(model.piece)
-
+	_initialize_models(boardModel.models)
 
 func _get_screen_position_from_model(model: Model) -> Vector2:
 	var tileSize := boardGenerator.tileSize
@@ -53,6 +48,8 @@ func _animate_swap(selection: Piece, piece: Piece):
 
 func on_piece_clicked(piece: Piece):
 	if (selection == piece):
+		selection.hide_selection()
+		selection = null
 		return
 		
 	if selection and boardModel.is_neighbor(selection, piece):
@@ -74,7 +71,7 @@ func on_piece_clicked(piece: Piece):
 		if selection:
 			selection.hide_selection()
 		selection = piece
-		piece.display_selection()
+		selection.display_selection()
 	
 
 func update_board():
@@ -86,12 +83,15 @@ func update_board():
 		model.piece.disappear()
 	
 	boardModel.descend_models()
+	var new_models := boardModel.refill()
+	_initialize_models(new_models)
 	for model in boardModel.models:
 		model.piece.update_position(_get_screen_position_from_model(model))
-	
-	# refill 
-	# boardModel.refill()
-	#for model in boardModel.models:
-		#model.piece.update_position(_get_screen_position_from_model(model), tween)
-		#await tween.finished
-	# animate refill
+
+func _initialize_models(models: Array[Model]) -> void:
+	for model in models:
+		model.piece.position = _get_screen_position_from_model(model) + Vector2(0, -6 * boardGenerator.tileSize)
+		model.piece.update_position(_get_screen_position_from_model(model))
+		model.piece.set_size(pieceSize, boardGenerator.tileSize)
+		model.piece.clicked.connect(on_piece_clicked)
+		boardGenerator.board.add_child(model.piece)
