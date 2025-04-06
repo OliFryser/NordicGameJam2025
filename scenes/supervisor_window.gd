@@ -31,9 +31,7 @@ func set_scared() -> void:
 
 
 func start_point_response(reward: int) -> void:
-	if reward > 50:
-		say.emit(pointResponses.pick_random())
-
+	pass
 
 func start_level_completion_response(level: int) -> void:
 	if level < levelCompleteResponses.size():

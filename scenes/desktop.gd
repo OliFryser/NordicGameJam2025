@@ -9,6 +9,8 @@ extends Node2D
 @export var dialogueWindow: DialogueWindow
 @export var closeWindowButton : Button
 @export var rewardLabel : Label
+@export var cursorIdle: Texture
+@export var cursorClick: Texture
 
 
 func _input(event):
@@ -17,6 +19,8 @@ func _input(event):
 
 
 func _ready() -> void:
+	Input.set_custom_mouse_cursor(cursorIdle)
+	
 	rewardLabel.pivot_offset = Vector2(rewardLabel.size * .5)
 	rewardLabel.scale = Vector2(0,0)
 	match3.new_points.connect(on_points_received)

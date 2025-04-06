@@ -108,8 +108,9 @@ func update_board():
 	new_points.emit(reward, points)
 	points_sound.play()
 	
-	voice_effects_player.stream = voice_effects.pick_random()
-	voice_effects_player.play()
+	if matches.size() > 3:
+		voice_effects_player.stream = voice_effects.pick_random()
+		voice_effects_player.play()
 		
 	boardModel.remove_models(matches)
 	var tweenDisappear := create_tween()
