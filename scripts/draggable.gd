@@ -2,6 +2,9 @@ class_name Draggable
 extends Node2D
 
 
+signal window_dragged(dragged_window: Draggable)
+
+
 @export var dragButton: Button
 var isDragged: bool
 var dragPoint: Vector2
@@ -12,7 +15,6 @@ func _ready() -> void:
 			func (): 
 				isDragged = true
 				dragPoint = get_viewport().get_mouse_position()
-				
 	)
 	dragButton.button_up.connect(func (): isDragged = false)
 
@@ -23,3 +25,4 @@ func _process(delta: float) -> void:
 		var moved := newPoint - dragPoint
 		dragPoint = newPoint
 		position += moved
+		window_dragged.emit(self)

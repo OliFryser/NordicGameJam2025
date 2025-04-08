@@ -1,9 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cuuve4yh8wwoc"]
+[gd_scene load_steps=24 format=3 uid="uid://cuuve4yh8wwoc"]
 
-[ext_resource type="Script" uid="uid://b6svxojfs2br1" path="res://scenes/background.gd" id="1_gl26t"]
+[ext_resource type="Script" uid="uid://b6svxojfs2br1" path="res://scripts/background.gd" id="1_gl26t"]
 [ext_resource type="Texture2D" uid="uid://lnsyukrps6mc" path="res://sprites/UI Assets/Main_Desktop.png" id="1_pkmwo"]
-[ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scenes/supervisor_window.gd" id="1_veafp"]
-[ext_resource type="Script" uid="uid://d1bp06p76tyfw" path="res://scenes/desktop.gd" id="1_vxgxr"]
+[ext_resource type="Script" uid="uid://b5sl3fiy7ywro" path="res://scripts/supervisor_window.gd" id="1_veafp"]
+[ext_resource type="Script" uid="uid://d1bp06p76tyfw" path="res://scripts/desktop.gd" id="1_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://c44qsw6mrw706" path="res://sprites/UI Assets/Supervisor_Window.png" id="1_xxa2h"]
 [ext_resource type="Texture2D" uid="uid://dm34i3oh3tu76" path="res://sprites/Player_Cursor_Idle_v2.png" id="2_3erbe"]
 [ext_resource type="Texture2D" uid="uid://cur3bth0yr7ch" path="res://sprites/UI Assets/Game_Window.png" id="2_7gre8"]
@@ -16,8 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://6588ll52uf5o" path="res://sprites/UI Assets/Main_Desktop_Step_2.png" id="4_yhf0c"]
 [ext_resource type="Texture2D" uid="uid://di3to50h6bgjp" path="res://sprites/UI Assets/Main_Desktop_Step_3.png" id="5_vxgxr"]
 [ext_resource type="Texture2D" uid="uid://dxi3rrb2j2qwo" path="res://sprites/UI Assets/Main_Desktop_Final_Step.png" id="6_6r5gw"]
+[ext_resource type="Script" uid="uid://bs3pbawos6tjn" path="res://scripts/window_manager.gd" id="10_1dbpt"]
 [ext_resource type="FontFile" uid="uid://dwbrd00ek7qls" path="res://fonts/Tahoma.ttf" id="13_yhf0c"]
-[ext_resource type="Script" uid="uid://bsfww3o17hc41" path="res://scenes/draggable.gd" id="14_v4dq8"]
+[ext_resource type="Script" uid="uid://bsfww3o17hc41" path="res://scripts/draggable.gd" id="14_v4dq8"]
 [ext_resource type="PackedScene" uid="uid://i2oo3b8b5jvx" path="res://scenes/progress_tick.tscn" id="16_3liqb"]
 [ext_resource type="Texture2D" uid="uid://dw7l5e8cxis1h" path="res://sprites/UI Assets/Progress_Bar.png" id="16_6r5gw"]
 [ext_resource type="AudioStream" uid="uid://bdv30o3ljv8kp" path="res://Sound/SFX/msn-sound_1.mp3" id="16_iamu6"]
@@ -25,14 +26,14 @@
 
 [node name="Desktop" type="Node2D" node_paths=PackedStringArray("match3", "score_label", "background", "progressBarWindow", "supervisorWindow", "dialogueWindow", "closeWindowButton", "rewardLabel")]
 script = ExtResource("1_vxgxr")
-match3 = NodePath("Draggable/GameWindow/Match3")
-score_label = NodePath("Draggable/GameWindow/Label")
+match3 = NodePath("WindowManager/GameDraggable/GameWindow/Match3")
+score_label = NodePath("WindowManager/GameDraggable/GameWindow/Label")
 background = NodePath("Background")
-progressBarWindow = NodePath("ProgressBarWindow")
-supervisorWindow = NodePath("SupervisorWindow")
-dialogueWindow = NodePath("DialogueWindow")
-closeWindowButton = NodePath("Draggable/GameWindow/CloseGameButton")
-rewardLabel = NodePath("Draggable/GameWindow/RewardLabel")
+progressBarWindow = NodePath("WindowManager/ProgressBarDraggable/ProgressBarWindow")
+supervisorWindow = NodePath("WindowManager/SupervisorDraggable/SupervisorWindow")
+dialogueWindow = NodePath("WindowManager/DialogueDraggable/DialogueWindow")
+closeWindowButton = NodePath("WindowManager/GameDraggable/GameWindow/CloseGameButton")
+rewardLabel = NodePath("WindowManager/GameDraggable/GameWindow/RewardLabel")
 cursorIdle = ExtResource("2_3erbe")
 cursorClick = ExtResource("3_3erbe")
 
@@ -44,52 +45,42 @@ backgrounds = Array[Texture]([ExtResource("1_pkmwo"), ExtResource("3_nd1jb"), Ex
 [node name="Sprite2D" type="Sprite2D" parent="Background"]
 texture = ExtResource("1_pkmwo")
 
-[node name="SupervisorWindow" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "closeButton")]
-position = Vector2(730, -299)
-script = ExtResource("1_veafp")
-sprite = NodePath("SupervisorSprite")
-supervisorIdle = ExtResource("2_pkmwo")
-supervisorScared = ExtResource("3_gl26t")
-closeButton = NodePath("Button")
-pointResponses = Array[String](["Awesome!", "Outstanding!", "Prodigious!", "Cost-Effective!", "Professional!", "Competent!", "Repressive!"])
-levelCompleteResponses = Array[String](["Well done, employee! Keep up the strong sorting work!", "Maintain your focus, employee! There are many more pieces still to be sorted!", "Don't lose sight of your goal, employee; you're helping the world progress!", "Employee: the pieces you sort are a threat to Safety! Maintain your resolve!", "Employee: understand how grateful people are for the invaluable service your sorting fulfills in maintaining Safety!"])
-
-[node name="WindowFrame" type="Node2D" parent="SupervisorWindow"]
-
-[node name="Sprite2D" type="Sprite2D" parent="SupervisorWindow/WindowFrame"]
-texture = ExtResource("1_xxa2h")
-
-[node name="SupervisorSprite" type="Sprite2D" parent="SupervisorWindow"]
-position = Vector2(0, 27.975)
-scale = Vector2(0.36, 0.36)
-texture = ExtResource("2_pkmwo")
-
-[node name="Button" type="Button" parent="SupervisorWindow"]
-modulate = Color(1, 1, 1, 0)
-offset_left = 91.0
-offset_top = -118.0
-offset_right = 99.0
-offset_bottom = -110.0
-scale = Vector2(3.15456, 3.27432)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Draggable" type="Node2D" parent="." node_paths=PackedStringArray("dragButton")]
+[node name="Dock" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -978.0
+offset_top = -571.0
+offset_right = -938.0
+offset_bottom = -531.0
+scale = Vector2(49.64, 28.64)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="WindowManager" type="Node" parent="." node_paths=PackedStringArray("managed_windows")]
+script = ExtResource("10_1dbpt")
+managed_windows = [NodePath("GameDraggable"), NodePath("DialogueDraggable"), NodePath("SupervisorDraggable")]
+offset = 5
+
+[node name="GameDraggable" type="Node2D" parent="WindowManager" node_paths=PackedStringArray("dragButton")]
 position = Vector2(-146, -6)
 script = ExtResource("14_v4dq8")
 dragButton = NodePath("GameWindow/DragButton")
 
-[node name="GameWindow" type="Node2D" parent="Draggable"]
+[node name="GameWindow" type="Node2D" parent="WindowManager/GameDraggable"]
 
-[node name="Match3" parent="Draggable/GameWindow" instance=ExtResource("2_81rff")]
-tileSize = 100
+[node name="WindowFrame" type="Node2D" parent="WindowManager/GameDraggable/GameWindow"]
 
-[node name="WindowFrame" type="Node2D" parent="Draggable/GameWindow"]
-
-[node name="Sprite2D" type="Sprite2D" parent="Draggable/GameWindow/WindowFrame"]
+[node name="Sprite2D" type="Sprite2D" parent="WindowManager/GameDraggable/GameWindow/WindowFrame"]
 texture = ExtResource("2_7gre8")
 
-[node name="Label" type="Label" parent="Draggable/GameWindow"]
+[node name="Match3" parent="WindowManager/GameDraggable/GameWindow" instance=ExtResource("2_81rff")]
+z_index = 0
+tileSize = 100
+
+[node name="Label" type="Label" parent="WindowManager/GameDraggable/GameWindow"]
 offset_left = -626.0
 offset_top = -391.0
 offset_right = -226.0
@@ -99,7 +90,7 @@ theme_override_fonts/font = ExtResource("13_yhf0c")
 theme_override_font_sizes/font_size = 36
 text = "Salary: $0"
 
-[node name="CloseGameButton" type="Button" parent="Draggable/GameWindow"]
+[node name="CloseGameButton" type="Button" parent="WindowManager/GameDraggable/GameWindow"]
 modulate = Color(1, 1, 1, 0)
 offset_left = 615.0
 offset_top = -430.0
@@ -107,8 +98,7 @@ offset_right = 623.0
 offset_bottom = -422.0
 scale = Vector2(2.96462, 3.2)
 
-[node name="RewardLabel" type="Label" parent="Draggable/GameWindow"]
-z_index = 5
+[node name="RewardLabel" type="Label" parent="WindowManager/GameDraggable/GameWindow"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -129,7 +119,7 @@ text = "$ 20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DragButton" type="Button" parent="Draggable/GameWindow"]
+[node name="DragButton" type="Button" parent="WindowManager/GameDraggable/GameWindow"]
 modulate = Color(1, 1, 1, 0)
 offset_left = -646.0
 offset_top = -435.0
@@ -137,41 +127,96 @@ offset_right = -638.0
 offset_bottom = -427.0
 scale = Vector2(150.53, 4.097)
 
-[node name="DialogueWindow" parent="." node_paths=PackedStringArray("soundPlayer") instance=ExtResource("4_ox5hf")]
-z_index = 10
+[node name="DialogueDraggable" type="Node2D" parent="WindowManager" node_paths=PackedStringArray("dragButton")]
+script = ExtResource("14_v4dq8")
+dragButton = NodePath("Dragger")
+metadata/_custom_type_script = "uid://bsfww3o17hc41"
+
+[node name="DialogueWindow" parent="WindowManager/DialogueDraggable" node_paths=PackedStringArray("soundPlayer") instance=ExtResource("4_ox5hf")]
 position = Vector2(606, 232)
 soundPlayer = NodePath("SoundEffectPlayer")
 
-[node name="SoundEffectPlayer" type="AudioStreamPlayer2D" parent="DialogueWindow"]
+[node name="SoundEffectPlayer" type="AudioStreamPlayer2D" parent="WindowManager/DialogueDraggable/DialogueWindow"]
 stream = ExtResource("16_iamu6")
 volume_db = 18.0
 
-[node name="Dock" type="Node2D" parent="."]
+[node name="Dragger" type="Button" parent="WindowManager/DialogueDraggable"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 420.0
+offset_top = 105.0
+offset_right = 428.0
+offset_bottom = 113.0
+scale = Vector2(41.88, 4.44)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
-offset_left = -978.0
-offset_top = -571.0
-offset_right = -938.0
-offset_bottom = -531.0
-scale = Vector2(49.64, 28.64)
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+[node name="ProgressBarDraggable" type="Node2D" parent="WindowManager" node_paths=PackedStringArray("dragButton")]
+z_index = 100
+script = ExtResource("14_v4dq8")
+dragButton = NodePath("Dragger")
+metadata/_custom_type_script = "uid://bsfww3o17hc41"
 
-[node name="ProgressBarWindow" type="Node2D" parent="." node_paths=PackedStringArray("progressBar")]
+[node name="ProgressBarWindow" type="Node2D" parent="WindowManager/ProgressBarDraggable" node_paths=PackedStringArray("progressBar")]
 position = Vector2(0, 401)
 script = ExtResource("16_wbccy")
 progressForNextLevel = 400
 progressTick = ExtResource("16_3liqb")
 progressBar = NodePath("HBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ProgressBarWindow"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowManager/ProgressBarDraggable/ProgressBarWindow"]
 offset_left = -213.0
 offset_top = 20.0
 offset_right = 247.0
 offset_bottom = 20.0
 theme_override_constants/separation = 10
 
-[node name="Sprite2D" type="Sprite2D" parent="ProgressBarWindow"]
+[node name="Sprite2D" type="Sprite2D" parent="WindowManager/ProgressBarDraggable/ProgressBarWindow"]
 z_index = 1
 texture = ExtResource("16_6r5gw")
+
+[node name="Dragger" type="Button" parent="WindowManager/ProgressBarDraggable"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -298.0
+offset_top = 316.0
+offset_right = -290.0
+offset_bottom = 324.0
+scale = Vector2(74.08, 4.72)
+
+[node name="SupervisorDraggable" type="Node2D" parent="WindowManager" node_paths=PackedStringArray("dragButton")]
+script = ExtResource("14_v4dq8")
+dragButton = NodePath("Dragger")
+metadata/_custom_type_script = "uid://bsfww3o17hc41"
+
+[node name="SupervisorWindow" type="Node2D" parent="WindowManager/SupervisorDraggable" node_paths=PackedStringArray("sprite", "closeButton")]
+position = Vector2(730, -299)
+script = ExtResource("1_veafp")
+sprite = NodePath("SupervisorSprite")
+supervisorIdle = ExtResource("2_pkmwo")
+supervisorScared = ExtResource("3_gl26t")
+closeButton = NodePath("Button")
+pointResponses = Array[String](["Awesome!", "Outstanding!", "Prodigious!", "Cost-Effective!", "Professional!", "Competent!", "Repressive!"])
+levelCompleteResponses = Array[String](["Well done, employee! Keep up the strong sorting work!", "Maintain your focus, employee! There are many more pieces still to be sorted!", "Don't lose sight of your goal, employee; you're helping the world progress!", "Employee: the pieces you sort are a threat to Safety! Maintain your resolve!", "Employee: understand how grateful people are for the invaluable service your sorting fulfills in maintaining Safety!"])
+
+[node name="WindowFrame" type="Node2D" parent="WindowManager/SupervisorDraggable/SupervisorWindow"]
+
+[node name="Sprite2D" type="Sprite2D" parent="WindowManager/SupervisorDraggable/SupervisorWindow/WindowFrame"]
+texture = ExtResource("1_xxa2h")
+
+[node name="SupervisorSprite" type="Sprite2D" parent="WindowManager/SupervisorDraggable/SupervisorWindow"]
+position = Vector2(0, 27.975)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("2_pkmwo")
+
+[node name="Button" type="Button" parent="WindowManager/SupervisorDraggable/SupervisorWindow"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 91.0
+offset_top = -118.0
+offset_right = 99.0
+offset_bottom = -110.0
+scale = Vector2(3.15456, 3.27432)
+
+[node name="Dragger" type="Button" parent="WindowManager/SupervisorDraggable"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 606.0
+offset_top = -422.0
+offset_right = 614.0
+offset_bottom = -414.0
+scale = Vector2(26.64, 4.24)
