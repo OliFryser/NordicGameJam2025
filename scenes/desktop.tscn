@@ -129,7 +129,7 @@ scale = Vector2(150.53, 4.097)
 
 [node name="DialogueDraggable" type="Node2D" parent="WindowManager" node_paths=PackedStringArray("dragButton")]
 script = ExtResource("14_v4dq8")
-dragButton = NodePath("Dragger")
+dragButton = NodePath("DialogueWindow/Dragger")
 metadata/_custom_type_script = "uid://bsfww3o17hc41"
 
 [node name="DialogueWindow" parent="WindowManager/DialogueDraggable" node_paths=PackedStringArray("soundPlayer") instance=ExtResource("4_ox5hf")]
@@ -140,12 +140,12 @@ soundPlayer = NodePath("SoundEffectPlayer")
 stream = ExtResource("16_iamu6")
 volume_db = 18.0
 
-[node name="Dragger" type="Button" parent="WindowManager/DialogueDraggable"]
+[node name="Dragger" type="Button" parent="WindowManager/DialogueDraggable/DialogueWindow"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 420.0
-offset_top = 105.0
-offset_right = 428.0
-offset_bottom = 113.0
+offset_left = -186.0
+offset_top = -127.0
+offset_right = -178.0
+offset_bottom = -119.0
 scale = Vector2(41.88, 4.44)
 
 [node name="ProgressBarDraggable" type="Node2D" parent="WindowManager" node_paths=PackedStringArray("dragButton")]
